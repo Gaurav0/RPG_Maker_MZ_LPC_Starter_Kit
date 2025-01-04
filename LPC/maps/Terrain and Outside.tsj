@@ -1,0 +1,15 @@
+{ "columns":32,
+ "image":"../img/tilesets/LPC/Terrain and Outside.png",
+ "imageheight":1024,
+ "imagewidth":1024,
+ "margin":0,
+ "name":"Terrain and Outside",
+ "spacing":0,
+ "tilecount":1024,
+ "tiledversion":"1.11.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#898989",
+ "type":"tileset",
+ "version":"1.10"
+}

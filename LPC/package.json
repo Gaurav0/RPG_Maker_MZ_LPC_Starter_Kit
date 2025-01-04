@@ -1,0 +1,12 @@
+{
+    "name": "rmmz-game",
+    "main": "index.html",
+    "chromium-args": "--force-color-profile=srgb",
+    "window": {
+        "title": "LPC",
+        "width": 1632,
+        "height": 1248,
+        "position": "center",
+        "icon": "icon/icon.png"
+    }
+}
