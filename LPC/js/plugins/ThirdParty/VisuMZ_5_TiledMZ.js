@@ -2097,7 +2097,11 @@ Game_Map.prototype._setupCollisionArrow = function(layer, index) {
                 return true;
             }
         } else if (!!data) {
-            bit = this._arrowBit(arrow);
+            if (collision === "full") {
+                bit = 15;
+            } else {
+                bit = this._arrowBit(arrow);
+            }
             collisionMap[x].arrow = bit;
             return true;
         }
