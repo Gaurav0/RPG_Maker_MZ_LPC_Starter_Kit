@@ -1011,8 +1011,7 @@ TiledTilemap.prototype._setupAnim = function() {
 
 TiledTilemap.prototype.isPaintableLayer = function(layerData) {
     if (layerData.type !== "tilelayer") return false;
-        if (!!layerData.collision ||
-            !!layerData.toLevel ||
+        if (!!layerData.toLevel ||
             !!layerData.regionId ||
             layerData.hiddenInGame === true) {
                 return false;
