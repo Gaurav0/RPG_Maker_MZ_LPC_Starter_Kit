@@ -210,11 +210,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "source":"Terrain and Outside.tsj"
+         "source":"tilesets/Terrain and Outside.json"
         }, 
         {
          "firstgid":1025,
-         "source":"Outside Objects.tsj"
+         "source":"tilesets/Outside Objects.json"
         }],
  "tilewidth":32,
  "type":"map",
