@@ -1256,9 +1256,6 @@ Bitmap.load = function(url) {
     bitmap.initialize();
     console.log(url);
     url = new URL(url, window.location.href).href;
-    url = url.replace(
-        'https://gaurav0.github.io/RPG_Maker_MZ_LPC_Starter_Kit/',
-        'https://media.githubusercontent.com/media/Gaurav0/RPG_Maker_MZ_LPC_Starter_Kit/refs/heads/gh-pages/');
     console.log(url);
     bitmap._url = url;
     bitmap._startLoading();
