@@ -11,6 +11,8 @@
  * @target MZ
  */
 
+Graphics._switchStretchMode();
+
 const charParams = {
     pw: 64,
     ph: 64,
