@@ -1,0 +1,15 @@
+{ "columns":12,
+ "image":"..\/..\/img\/characters\/Doors\/Doorframe A.png",
+ "imageheight":192,
+ "imagewidth":384,
+ "margin":0,
+ "name":"Doorframe A",
+ "spacing":0,
+ "tilecount":72,
+ "tiledversion":"1.11.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#000000",
+ "type":"tileset",
+ "version":"1.10"
+}
