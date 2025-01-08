@@ -1,0 +1,267 @@
+body/bodies/female/light.png
+	- Note: see details at https://opengameart.org/content/lpc-character-bases
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- Benjamin K. Smith (BenCreating)
+		- bluecarrot16
+		- TheraHedwig
+		- Evert
+		- MuffinElZangano
+		- Durrani
+		- Pierre Vigier (pvigier)
+		- ElizaWy
+		- Matthew Krohn (makrohn)
+		- Johannes Sjölund (wulax)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
+		- https://opengameart.org/content/lpc-ladies
+		- https://opengameart.org/content/lpc-7-womens-shirts
+		- https://opengameart.org/content/lpc-jump-expanded
+		- https://opengameart.org/content/lpc-be-seated
+		- https://opengameart.org/content/lpc-revised-character-basics
+		- https://gitlab.com/vagabondgame/lpc-characters
+		- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani
+		- https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle
+
+head/heads/human/female/light.png
+	- Note: original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- bluecarrot16
+		- Benjamin K. Smith (BenCreating)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/
+		- https://opengameart.org/content/lpc-character-bases
+
+head/ears/big/adult/light.png
+	- Note: adapted to v3 base by bluecarrot16; expanded to other animations and child by JaidynReiman
+	- Licenses:
+		- GPL 3.0
+		- CC-BY-SA 3.0
+	- Authors:
+		- JaidynReiman
+		- bluecarrot16
+		- Thane Brimhall (pennomi)
+		- Matthew Krohn (makrohn)
+	- Links:
+		- https://opengameart.org/content/lpc-base-character-expressions
+		- http://opengameart.org/content/lpc-clothing-updates
+
+head/nose/straight/adult/light.png
+	- Note: 
+	- Licenses:
+		- GPL 3.0
+		- CC-BY-SA 3.0
+	- Authors:
+		- Thane Brimhall (pennomi)
+		- Matthew Krohn (makrohn)
+	- Links:
+		- https://opengameart.org/content/lpc-base-character-expressions
+
+eyes/human/adult/blue.png
+	- Note: original by Redshrike, mapped to all frames by Matthew Krohn & JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+		- Matthew Krohn (makrohn)
+		- Stephen Challener (Redshrike)
+	- Links:
+		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
+
+hair/parted_side_bangs/adult/strawberry.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles
+		- https://github.com/jrconway3/Universal-LPC-spritesheet/commit/46ddcf05a0e43e7aa6ffd47d350eef0eb529ac24
+
+hair/extensions/ponytails/topknot_short/adult/strawberry.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0+
+		- CC-BY 3.0+
+		- CC-BY-SA 3.0
+		- GPL 3.0
+	- Authors:
+		- JaidynReiman
+	- Links:
+		- https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles
+
+torso/clothes/sleeveless/sleeveless2/female/forest.png
+	- Note: original by ElizaWy; sleeveless adapted from original by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+		- JaidynReiman
+	- Links:
+		- http://opengameart.org/content/lpc-revised-character-basics
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+legs/shorts/shorts/thin/rose.png
+	- Note: original by ElizaWy, remaining frames by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+		- JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+		- https://opengameart.org/content/lpc-expanded-pants
+
+feet/shoes2/thin/forest.png
+	- Note: original by ElizaWy, remaining frames by JaidynReiman
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy
+		- JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+		- https://opengameart.org/content/lpc-expanded-socks-shoes
+
+shield/heater/original/wood/bg/oak.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- bluecarrot16
+		- Sander Frenken (castelonia)
+		- ElizaWy
+	- Links:
+		- https://opengameart.org/content/lpc-shields
+
+shield/heater/original/wood/fg/oak.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- bluecarrot16
+		- Sander Frenken (castelonia)
+		- ElizaWy
+	- Links:
+		- https://opengameart.org/content/lpc-shields
+
+shield/heater/original/trim/fg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- bluecarrot16
+		- Sander Frenken (castelonia)
+		- ElizaWy
+	- Links:
+		- https://opengameart.org/content/lpc-shields
+
+shield/heater/original/trim/bg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- bluecarrot16
+		- Sander Frenken (castelonia)
+		- ElizaWy
+	- Links:
+		- https://opengameart.org/content/lpc-shields
+
+weapon/sword/arming/universal/fg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/universal/bg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_slash/bg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_slash/fg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_backslash/bg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_backslash/fg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_halfslash/bg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
+weapon/sword/arming/attack_halfslash/fg/steel.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/expanded-universal-lpc-spritesheet-idle-run-jump-lpc-revised-combat-and-assets
+
