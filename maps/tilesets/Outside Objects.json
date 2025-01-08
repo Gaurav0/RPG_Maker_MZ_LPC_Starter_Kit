@@ -1,5 +1,5 @@
 { "columns":32,
- "image":"img/tilesets/LPC/Outside Objects.png",
+ "image":"../../img/tilesets/LPC/Outside Objects.png",
  "imageheight":1024,
  "imagewidth":1024,
  "margin":0,
