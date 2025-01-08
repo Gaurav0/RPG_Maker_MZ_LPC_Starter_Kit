@@ -1,0 +1,101 @@
+{
+  "bodyTypeName": "female",
+  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_female_light&sex=female&hair=Sara_blonde&earring_left=Simple_Earring_Left_blue&earring_right=Simple_Earring_Right_blue&earrings=none&eyes=Eyes_blue&nose=Straight_nose_light&clothes=Shortsleeve_sky&hat=Tiara_tiara_silver&apron=none&shoes=Sara_sara&legs=Straight_skirt_navy&sash=Waistband_rose&cape=none&facial_left=none&neck=none&buckles=Buckles_gold&weapon=none",
+  "spritesheets": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
+  "version": 1,
+  "datetime": "1/4/2025, 12:48:32 PM",
+  "credits": "body/bodies/female/light.png\n\t- Note: see details at https://opengameart.org/content/lpc-character-bases\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- Benjamin K. Smith (BenCreating)\n\t\t- bluecarrot16\n\t\t- TheraHedwig\n\t\t- Evert\n\t\t- MuffinElZangano\n\t\t- Durrani\n\t\t- Pierre Vigier (pvigier)\n\t\t- ElizaWy\n\t\t- Matthew Krohn (makrohn)\n\t\t- Johannes Sjölund (wulax)\n\t\t- Stephen Challener (Redshrike)\n\t- Links:\n\t\t- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n\t\t- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n\t\t- https://opengameart.org/content/lpc-ladies\n\t\t- https://opengameart.org/content/lpc-7-womens-shirts\n\t\t- https://opengameart.org/content/lpc-jump-expanded\n\t\t- https://opengameart.org/content/lpc-be-seated\n\t\t- https://opengameart.org/content/lpc-revised-character-basics\n\t\t- https://gitlab.com/vagabondgame/lpc-characters\n\t\t- https://opengameart.org/content/lpc-male-jumping-animation-by-durrani\n\t\t- https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle\n\nhead/heads/human/female/light.png\n\t- Note: original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- bluecarrot16\n\t\t- Benjamin K. Smith (BenCreating)\n\t\t- Stephen Challener (Redshrike)\n\t- Links:\n\t\t- https://opengameart.org/content/\n\t\t- https://opengameart.org/content/lpc-character-bases\n\nhead/nose/straight/adult/light.png\n\t- Note: \n\t- Licenses:\n\t\t- GPL 3.0\n\t\t- CC-BY-SA 3.0\n\t- Authors:\n\t\t- Thane Brimhall (pennomi)\n\t\t- Matthew Krohn (makrohn)\n\t- Links:\n\t\t- https://opengameart.org/content/lpc-base-character-expressions\n\neyes/human/adult/blue.png\n\t- Note: original by Redshrike, mapped to all frames by Matthew Krohn & JaidynReiman\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- JaidynReiman\n\t\t- Matthew Krohn (makrohn)\n\t\t- Stephen Challener (Redshrike)\n\t- Links:\n\t\t- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n\nhair/sara/female/blonde.png\n\t- Note: \n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY 3.0\n\t- Authors:\n\t\t- Stephen Challener (Redshrike)\n\t\t- William.Thompsonj\n\t\t- Mandi Paugh\n\t\t- bluecarrot16\n\t- Links:\n\t\t- https://opengameart.org/content/lpc-sara\n\t\t- https://opengameart.org/content/lpc-hair\n\nhat/formal/tiara/adult/tiara_silver.png\n\t- Note: \n\t- Licenses:\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- Luke Mehl\n\t- Links:\n\t\t- https://opengameart.org/content/female-mage-clothing-set\n\t\t- https://opengameart.org/content/expanded-ulpc-head-accessories-facial-assets-hats-helmets\n\nfacial/earrings/simple/left/adult/blue.png\n\t- Note: \n\t- Licenses:\n\t\t- CC0\n\t- Authors:\n\t\t- bluecarrot16\n\t- Links:\n\t\t- https://opengameart.org/content/lpc-pirates\n\nfacial/earrings/simple/right/adult/blue.png\n\t- Note: \n\t- Licenses:\n\t\t- CC0\n\t- Authors:\n\t\t- bluecarrot16\n\t- Links:\n\t\t- https://opengameart.org/content/lpc-pirates\n\ntorso/clothes/shortsleeve/shortsleeve/female/sky.png\n\t- Note: original by ElizaWy walkcycle only; extended to all animations by adapting from longsleeve, edited to v3 bases by bluecarrot16\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- bluecarrot16\n\t\t- ElizaWy\n\t\t- Stephen Challener (Redshrike)\n\t- Links:\n\t\t- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles\n\t\t- https://opengameart.org/content/lpc-7-womens-shirts\n\t\t- http://opengameart.org/content/lpc-revised-character-basics\n\t\t- http://opengameart.org/content/lpc-clothing-updates\n\ntorso/waist/waistband/female/rose.png\n\t- Note: LPC Sara by Redshrike, contributed by William Thompsonj, Waistband Separated by Bluecarrot16\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t- Authors:\n\t\t- Bluecarrot16\n\t\t- Mandi Paugh\n\t\t- Stephen Challener (Redshrike)\n\t\t- William.Thompsonj\n\t- Links:\n\t\t- http://opengameart.org/content/sara-wizard\n\t\t- https://opengameart.org/content/lpc-sara\n\ntorso/waist/buckles/female/gold.png\n\t- Note: \n\t- Licenses:\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- Luke Mehl\n\t- Links:\n\t\t- https://opengameart.org/content/female-mage-clothing-set\n\nlegs/skirts/straight/female/navy.png\n\t- Note: original skirt by ElizaWy, extended to all animation frames and edited for v3 bases by bluecarrot16\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- bluecarrot16\n\t\t- ElizaWy\n\t- Links:\n\t\t- http://opengameart.org/content/lpc-clothing-updates\n\nfeet/shoes/female/sara.png\n\t- Note: original by wulax, edited for female base by Joe White, edited for v3 base by bluecarrot16\n\t- Licenses:\n\t\t- OGA-BY 3.0\n\t\t- CC-BY-SA 3.0\n\t\t- GPL 3.0\n\t- Authors:\n\t\t- Joe White\n\t\t- Johannes Sjölund (wulax)\n\t- Links:\n\t\t- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites\n\t\t- http://opengameart.org/content/lpc-clothing-updates\n\n",
+  "layers": [
+    {
+      "fileName": "body/bodies/female/light.png",
+      "zPos": 10,
+      "parentName": "body",
+      "name": "Body color",
+      "variant": "light"
+    },
+    {
+      "fileName": "feet/shoes/female/sara.png",
+      "zPos": 15,
+      "parentName": "shoes",
+      "name": "Sara",
+      "variant": "sara"
+    },
+    {
+      "fileName": "legs/skirts/straight/female/navy.png",
+      "zPos": 20,
+      "parentName": "legs",
+      "name": "Straight skirt",
+      "variant": "navy"
+    },
+    {
+      "fileName": "torso/clothes/shortsleeve/shortsleeve/female/sky.png",
+      "zPos": 35,
+      "parentName": "clothes",
+      "name": "Shortsleeve",
+      "variant": "sky"
+    },
+    {
+      "fileName": "torso/waist/waistband/female/rose.png",
+      "zPos": 65,
+      "parentName": "sash",
+      "name": "Waistband",
+      "variant": "rose"
+    },
+    {
+      "fileName": "torso/waist/buckles/female/gold.png",
+      "zPos": 75,
+      "parentName": "buckles",
+      "name": "Buckles",
+      "variant": "gold"
+    },
+    {
+      "fileName": "head/heads/human/female/light.png",
+      "zPos": 100,
+      "parentName": "head",
+      "name": "Human female",
+      "variant": "light"
+    },
+    {
+      "fileName": "head/nose/straight/adult/light.png",
+      "zPos": 105,
+      "parentName": "nose",
+      "name": "Straight nose",
+      "variant": "light"
+    },
+    {
+      "fileName": "eyes/human/adult/blue.png",
+      "zPos": 105,
+      "parentName": "eyes",
+      "name": "Eyes",
+      "variant": "blue"
+    },
+    {
+      "fileName": "facial/earrings/simple/left/adult/blue.png",
+      "zPos": 115,
+      "parentName": "earring_left",
+      "name": "Simple Earring Left",
+      "variant": "blue"
+    },
+    {
+      "fileName": "facial/earrings/simple/right/adult/blue.png",
+      "zPos": 115,
+      "parentName": "earring_right",
+      "name": "Simple Earring Right",
+      "variant": "blue"
+    },
+    {
+      "fileName": "hair/sara/female/blonde.png",
+      "zPos": 120,
+      "parentName": "hair",
+      "name": "Sara",
+      "variant": "blonde"
+    },
+    {
+      "fileName": "hat/formal/tiara/adult/tiara_silver.png",
+      "zPos": 130,
+      "parentName": "hat",
+      "name": "Tiara",
+      "variant": "tiara_silver"
+    }
+  ]
+}
