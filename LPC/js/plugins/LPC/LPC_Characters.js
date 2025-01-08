@@ -11,6 +11,13 @@
  * @target MZ
  */
 
+FSInitStart = SceneManager.initialize;
+SceneManager.initialize = function() {
+    FSInitStart.call(this);
+    Graphics._switchStretchMode();
+    Graphics._requestFullScreen();
+};
+
 const charParams = {
     pw: 64,
     ph: 64,

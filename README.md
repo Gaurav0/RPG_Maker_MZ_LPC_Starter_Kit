@@ -3,6 +3,8 @@ Liberated Pixel Cup (LPC) Starter Kit for RPG Maker MZ / TileD Map Editor
 
 Under Construction
 
+Play it now in your browser at https://gaurav0.github.io/RPG_Maker_MZ_LPC_Starter_Kit
+
 Software Required
 ---
 
@@ -11,6 +13,11 @@ Software Required
 
 FAQ
 ===
+
+The screen is too small / too big in my browser!
+---
+
+Try pressing F3 to enable stretch mode. Press F4 afterward to go full screen.
 
 Where are the Credits / Licenses ?
 ---
