@@ -2020,6 +2020,7 @@ SceneManager.showDevTools = function() {
 };
 
 SceneManager.catchException = function(e) {
+    console.log(e);
     if (e instanceof Error) {
         this.catchNormalError(e);
     } else if (e instanceof Array && e[0] === "LoadError") {
