@@ -1256,7 +1256,6 @@ Bitmap.load = function(url) {
     bitmap.initialize();
     console.log(url);
     url = new URL(url, window.location.href).href;
-    console.log(url);
     bitmap._url = url;
     bitmap._startLoading();
     return bitmap;
