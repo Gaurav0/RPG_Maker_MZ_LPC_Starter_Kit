@@ -22,7 +22,7 @@ Try pressing F3 to enable stretch mode. Press F4 afterward to go full screen.
 Where are the Credits / Licenses ?
 ---
 
-For now they are with the assets. I will be adding a Credits screen at some point.
+For now they are with the assets. I did a first pass at a Credits screen, but it needs work. You can find it on the title menu.
 
 Why don't I see the map in RPG Maker MZ?
 ---

@@ -2020,7 +2020,6 @@ SceneManager.showDevTools = function() {
 };
 
 SceneManager.catchException = function(e) {
-    console.log(e);
     if (e instanceof Error) {
         this.catchNormalError(e);
     } else if (e instanceof Array && e[0] === "LoadError") {
@@ -2040,7 +2039,6 @@ SceneManager.catchNormalError = function(e) {
 SceneManager.catchLoadError = function(e) {
     const url = e[1];
     const retry = e[2];
-    console.log(url);
     Graphics.printError("Failed to load", url);
     if (retry) {
         Graphics.showRetryButton(() => {

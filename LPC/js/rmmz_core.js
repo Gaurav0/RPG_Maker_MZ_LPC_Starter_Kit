@@ -1254,7 +1254,6 @@ Bitmap.prototype.initialize = function(width, height) {
 Bitmap.load = function(url) {
     const bitmap = Object.create(Bitmap.prototype);
     bitmap.initialize();
-    console.log(url);
     url = new URL(url, window.location.href).href;
     bitmap._url = url;
     bitmap._startLoading();
