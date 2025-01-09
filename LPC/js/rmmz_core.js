@@ -1,5 +1,5 @@
 //=============================================================================
-// rmmz_core.js v1.7.0
+// rmmz_core.js v1.8.1
 //=============================================================================
 
 //-----------------------------------------------------------------------------
@@ -192,7 +192,7 @@ Utils.RPGMAKER_NAME = "MZ";
  * @type string
  * @constant
  */
-Utils.RPGMAKER_VERSION = "1.7.0";
+Utils.RPGMAKER_VERSION = "1.8.1";
 
 /**
  * Checks whether the current RPG Maker version is greater than or equal to
@@ -1254,7 +1254,6 @@ Bitmap.prototype.initialize = function(width, height) {
 Bitmap.load = function(url) {
     const bitmap = Object.create(Bitmap.prototype);
     bitmap.initialize();
-    url = new URL(url, window.location.href).href;
     bitmap._url = url;
     bitmap._startLoading();
     return bitmap;
