@@ -6845,7 +6845,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "Greg/Greg",
+            "characterName": "chars/Greg/Greg",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
@@ -6923,7 +6923,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "Sara/Sara",
+            "characterName": "chars/Sara/Sara",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
@@ -7000,11 +7000,11 @@
           },
           "directionFix": false,
           "image": {
-            "characterIndex": 7,
+            "tileId": 0,
             "characterName": "Doors/15 Panel Door A",
             "direction": 2,
             "pattern": 1,
-            "tileId": 0
+            "characterIndex": 7
           },
           "list": [
             {

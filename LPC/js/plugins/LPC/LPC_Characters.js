@@ -14,57 +14,84 @@
 FSInitStart = SceneManager.initialize;
 SceneManager.initialize = function() {
     FSInitStart.call(this);
-    Graphics._switchStretchMode();
     Graphics._requestFullScreen();
+    if (!Graphics._stretchEnabled) {
+        Graphics._switchStretchMode();
+    }
 };
 
-const charParams = {
-    pw: 64,
-    ph: 64,
-    xo: 8,
-    yo: 8,
-    cx: 0,
-    cy: 8,
-    dxo: 0,
-    dyo: 0,
-    frames: 9,
-    frame0: 0,
-    step: 1,
-    ay: 0.875
-};
-
-const doorParams = {
-    pw: 64,
-    ph: 128,
-    xo: 22,
-    yo: 28,
-    cx: 0,
-    cy: 0,
-    dxo: 16,
-    dyo: 12,
-    frames: 4,
-    frame0: 3,
-    step: -1,
-    ay: 0.625
-};
+const params = {
+    "chars": {
+        pw: 64,
+        ph: 64,
+        xo: 8,
+        yo: 8,
+        cx: 0,
+        cy: 8,
+        dxo: 0,
+        dyo: 0,
+        frames: 9,
+        frame0: 0,
+        step: 1,
+        ay: 0.875
+    },
+    "doors": {
+        pw: 64,
+        ph: 128,
+        xo: 22,
+        yo: 28,
+        cx: 0,
+        cy: 0,
+        dxo: 16,
+        dyo: 12,
+        frames: 4,
+        frame0: 3,
+        step: -1,
+        ay: 0.625
+    },
+    "enemies": {
+        pw: 64,
+        ph: 64,
+        xo: 8,
+        yo: 8,
+        cx: 0,
+        cy: 8,
+        dxo: 0,
+        dyo: 0,
+        frames: 9,
+        frame0: 0,
+        step: 1,
+        ay: 0.875
+    },
+    "null": {}
+}
 
 // javascript doesn't do modulus correctly for negative numbers
 const mod = (n, m) => (n % m + m) % m;
 
-Game_CharacterBase.prototype.isDoor = function() {
-    return this._characterName.toLowerCase().includes('door');
+Game_CharacterBase.prototype.paramType = function() {
+    if (!this._characterName) {
+        return 'null';
+    }
+    return this._characterName.toLowerCase().split('/')[0];
 };
 
+Game_CharacterBase.prototype.isDoor = function() {
+    return this.paramType() === 'doors';
+}
+
 Game_CharacterBase.prototype.numFrames = function() {
-    return this.isDoor() ? doorParams.frames : charParams.frames;
+    return params[this.paramType()].frames;
 };
 
 Game_CharacterBase.prototype.frame0 = function() {
-    return this.isDoor() ? (this.isOpen() ? 0 : doorParams.frame0) : charParams.frame0;
+    const frame0 = params[this.paramType()].frame0;
+    return this.isDoor() ? (this.isOpen() ? 0 : frame0) : frame0;
 };
 
 Game_CharacterBase.prototype.step = function() {
-    return this.isDoor() ? (this.isOpen() ? 1 : doorParams.step) : charParams.step;
+    const step = params[this.paramType()].step;
+    return this.isDoor() ? (this.isOpen() ? 1 : step) : step;
 };
 
 const Game_CharacterBase_setImage = Game_CharacterBase.prototype.setImage;
@@ -114,7 +141,7 @@ Game_CharacterBase.prototype.straighten = function () {
 
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);
-    this._isDoor = characterName.toLowerCase().includes('door');
+    this._isDoor = characterName.toLowerCase().startsWith('doors/');
     const o = this._isDoor ? doorParams : charParams;
     this._params = o;
     const { pw, ph, xo, yo } = o;
@@ -126,16 +153,23 @@ Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x
     this.contents.blt(bitmap, sx, sy, pw, ph, dx, dy);
 };
 
+Sprite_Character.prototype.paramType = function() {
+    if (!this._character.characterName()) {
+        return "null";
+    }
+    return this._character.characterName().toLowerCase().split('/')[0];
+};
+
 Sprite_Character.prototype.isDoor = function() {
-    return this._character.characterName().toLowerCase().includes('door');
+    return this.paramType() === "doors";
 };
 
 Sprite_Character.prototype.characterBlockX = function () {
-    return this.isDoor() ? doorParams.cx : charParams.cx;
+    return params[this.paramType()].cx;
 };
 
 Sprite_Character.prototype.characterBlockY = function () {
-    return this.isDoor() ? doorParams.cy : charParams.cy;
+    return params[this.paramType()].cy;
 };
 
 const LPC_directionMap = {
@@ -151,11 +185,11 @@ Sprite_Character.prototype.characterPatternY = function () {
 }
 
 Sprite_Character.prototype.patternWidth = function () {
-    return this.isDoor() ? doorParams.pw : charParams.pw;
+    return params[this.paramType()].pw;
 };
 
 Sprite_Character.prototype.patternHeight = function () {
-    return this.isDoor() ? doorParams.ph : charParams.ph;
+    return params[this.paramType()].ph;
 };
 
 Sprite_Character.prototype.updateCharacterFrame = function() {
@@ -176,13 +210,13 @@ Sprite_Character.prototype.updateCharacterFrame = function() {
 };
 
 Sprite_Character.prototype.characterOffsetX = function() {
-    return this.isDoor() ? doorParams.dxo : charParams.dxo;
+    return params[this.paramType()].dxo;
 };
 
 Sprite_Character.prototype.characterOffsetY = function() {
-    return this.isDoor() ? doorParams.dyo : charParams.dyo;
+    return params[this.paramType()].dyo;
 };
 
 Sprite_Character.prototype.anchorY = function() {
-    return this.isDoor() ? doorParams.ay : charParams.ay;
+    return params[this.paramType()].ay;
 }
