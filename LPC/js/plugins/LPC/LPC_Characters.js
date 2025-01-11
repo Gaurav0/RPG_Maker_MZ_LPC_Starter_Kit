@@ -52,16 +52,16 @@ const params = {
     "enemies": {
         pw: 64,
         ph: 64,
-        xo: 8,
-        yo: 8,
+        xo: 0,
+        yo: 0,
         cx: 0,
-        cy: 8,
+        cy: 0,
         dxo: 0,
         dyo: 0,
-        frames: 9,
+        frames: 5,
         frame0: 0,
         step: 1,
-        ay: 0.875
+        ay: 1
     },
     "null": {}
 }

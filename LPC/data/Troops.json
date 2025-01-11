@@ -14,9 +14,45 @@
         "x": 480,
         "y": 436,
         "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
       }
     ],
-    "name": "Goblin*2",
+    "name": "Wolf",
     "pages": [
       {
         "conditions": {
@@ -46,21 +82,8 @@
   },
   {
     "id": 2,
-    "members": [
-      {
-        "enemyId": 2,
-        "x": 337,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 2,
-        "x": 480,
-        "y": 436,
-        "hidden": false
-      }
-    ],
-    "name": "Gnome*2",
+    "members": [],
+    "name": "",
     "pages": [
       {
         "conditions": {
@@ -90,21 +113,8 @@
   },
   {
     "id": 3,
-    "members": [
-      {
-        "enemyId": 3,
-        "x": 337,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 3,
-        "x": 479,
-        "y": 436,
-        "hidden": false
-      }
-    ],
-    "name": "Crow*2",
+    "members": [],
+    "name": "",
     "pages": [
       {
         "conditions": {
@@ -134,15 +144,8 @@
   },
   {
     "id": 4,
-    "members": [
-      {
-        "enemyId": 4,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      }
-    ],
-    "name": "Treant",
+    "members": [],
+    "name": "",
     "pages": [
       {
         "conditions": {
@@ -172,15 +175,8 @@
   },
   {
     "id": 5,
-    "members": [
-      {
-        "enemyId": 5,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      }
-    ],
-    "name": "Hi_monster",
+    "members": [],
+    "name": "",
     "pages": [
       {
         "conditions": {
