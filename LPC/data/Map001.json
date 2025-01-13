@@ -7033,7 +7033,7 @@
                     {
                       "code": 15,
                       "parameters": [
-                        44
+                        20
                       ],
                       "indent": null
                     },
@@ -7078,7 +7078,7 @@
                 {
                   "code": 15,
                   "parameters": [
-                    44
+                    20
                   ],
                   "indent": null
                 }
@@ -7208,7 +7208,7 @@
     {
       "id": 4,
       "name": "wolf",
-      "note": "",
+      "note": "<type:enemy><id:1>",
       "pages": [
         {
           "conditions": {
@@ -7218,11 +7218,11 @@
             "itemValid": false,
             "selfSwitchCh": "A",
             "selfSwitchValid": false,
-            "switch1Id": 1,
+            "switch1Id": 43,
             "switch1Valid": false,
             "switch2Id": 1,
             "switch2Valid": false,
-            "variableId": 1,
+            "variableId": 46,
             "variableValid": false,
             "variableValue": 0
           },
@@ -7263,6 +7263,25 @@
               "indent": 0,
               "parameters": [
                 "I'm a monster. Let's fight!"
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "ThirdParty/SRPG/SRPG_core_MZ",
+                "StartEnd",
+                "Start/End SRPG battle",
+                {
+                  "key": "start"
+                }
+              ]
+            },
+            {
+              "code": 657,
+              "indent": 0,
+              "parameters": [
+                "Start/End toggle = start"
               ]
             },
             {

@@ -61,7 +61,7 @@ const params = {
         frames: 5,
         frame0: 0,
         step: 1,
-        ay: 1
+        ay: 0.667
     },
     "null": {}
 }
@@ -70,7 +70,7 @@ const params = {
 const mod = (n, m) => (n % m + m) % m;
 
 Game_CharacterBase.prototype.paramType = function() {
-    if (!this._characterName) {
+    if (!this._characterName || !this._characterName.includes('/')) {
         return 'null';
     }
     return this._characterName.toLowerCase().split('/')[0];
@@ -81,6 +81,9 @@ Game_CharacterBase.prototype.isDoor = function() {
 }
 
 Game_CharacterBase.prototype.numFrames = function() {
+    if (this.paramType() === 'null') {
+        return 4;
+    }
     return params[this.paramType()].frames;
 };
 
@@ -117,7 +120,7 @@ Game_CharacterBase.prototype.updatePattern = function () {
 };
 
 Game_CharacterBase.prototype.animationWait = function () {
-    return 60 / this.numFrames();
+    return 30 / this.numFrames();
 };
 
 Game_Event.prototype.resetPattern = function () {
@@ -154,7 +157,7 @@ Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x
 };
 
 Sprite_Character.prototype.paramType = function() {
-    if (!this._character.characterName()) {
+    if (!this._character.characterName() || !this._character.characterName().includes('/')) {
         return "null";
     }
     return this._character.characterName().toLowerCase().split('/')[0];
@@ -184,11 +187,19 @@ Sprite_Character.prototype.characterPatternY = function () {
     return LPC_directionMap[Sprite_Character_characterPatternY.call(this)];
 }
 
+const Sprite_Character_patternWidth = Sprite_Character.prototype.patternWidth;
 Sprite_Character.prototype.patternWidth = function () {
+    if (this.paramType() === 'null') {
+        return Sprite_Character_patternWidth.call(this);
+    }
     return params[this.paramType()].pw;
 };
 
+const Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
 Sprite_Character.prototype.patternHeight = function () {
+    if (this.paramType() === 'null') {
+        return Sprite_Character_patternHeight.call(this);
+    }
     return params[this.paramType()].ph;
 };
 

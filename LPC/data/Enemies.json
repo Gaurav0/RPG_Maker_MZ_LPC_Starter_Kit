@@ -12,7 +12,7 @@
       }
     ],
     "battlerHue": 0,
-    "battlerName": "",
+    "battlerName": "wolf_64_5",
     "dropItems": [
       {
         "dataId": 1,
@@ -50,7 +50,7 @@
     ],
     "gold": 0,
     "name": "wolf",
-    "note": "",
+    "note": "<characterName:wolf_64_5>\n<characterIndex:0>",
     "params": [
       100,
       0,
