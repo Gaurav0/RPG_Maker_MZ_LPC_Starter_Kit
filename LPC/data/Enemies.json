@@ -50,7 +50,7 @@
     ],
     "gold": 0,
     "name": "wolf",
-    "note": "<characterName:wolf_64_5>\n<characterIndex:0>",
+    "note": "<characterName:enemies/wolf_64_5>\n<characterIndex:0>",
     "params": [
       100,
       0,

@@ -69,11 +69,15 @@ const params = {
 // javascript doesn't do modulus correctly for negative numbers
 const mod = (n, m) => (n % m + m) % m;
 
-Game_CharacterBase.prototype.paramType = function() {
-    if (!this._characterName || !this._characterName.includes('/')) {
+const paramType = function(characterName) {
+    if (!characterName || !characterName.includes('/')) {
         return 'null';
     }
-    return this._characterName.toLowerCase().split('/')[0];
+    return characterName.toLowerCase().split('/')[0];
+};
+
+Game_CharacterBase.prototype.paramType = function() {
+    return paramType(this._characterName);
 };
 
 Game_CharacterBase.prototype.isDoor = function() {
@@ -144,8 +148,7 @@ Game_CharacterBase.prototype.straighten = function () {
 
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);
-    this._isDoor = characterName.toLowerCase().startsWith('doors/');
-    const o = this._isDoor ? doorParams : charParams;
+    const o = params[paramType(characterName)];
     this._params = o;
     const { pw, ph, xo, yo } = o;
     const n = characterIndex;
@@ -157,10 +160,7 @@ Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x
 };
 
 Sprite_Character.prototype.paramType = function() {
-    if (!this._character.characterName() || !this._character.characterName().includes('/')) {
-        return "null";
-    }
-    return this._character.characterName().toLowerCase().split('/')[0];
+    return paramType(this._character.characterName());
 };
 
 Sprite_Character.prototype.isDoor = function() {
@@ -231,3 +231,6 @@ Sprite_Character.prototype.characterOffsetY = function() {
 Sprite_Character.prototype.anchorY = function() {
     return params[this.paramType()].ay;
 }
+
+// Disable Animations for now
+Game_Temp.prototype.requestAnimation = function() {};

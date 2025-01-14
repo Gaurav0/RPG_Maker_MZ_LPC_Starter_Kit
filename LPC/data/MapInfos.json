@@ -9,5 +9,15 @@
     "scrollX": 0,
     "scrollY": 0,
     "quick": false
+  },
+  {
+    "id": 2,
+    "expanded": false,
+    "name": "map2",
+    "order": 2,
+    "parentId": 1,
+    "scrollX": 0,
+    "scrollY": 0,
+    "quick": false
   }
 ]

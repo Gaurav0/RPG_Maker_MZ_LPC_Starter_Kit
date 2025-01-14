@@ -36,54 +36,18 @@
     "members": [
       {
         "enemyId": 1,
-        "x": 336,
-        "y": 436,
+        "x": 240,
+        "y": 444,
         "hidden": false
       },
       {
         "enemyId": 1,
-        "x": 480,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
-        "hidden": false
-      },
-      {
-        "enemyId": 1,
-        "x": 408,
-        "y": 436,
+        "x": 576,
+        "y": 444,
         "hidden": false
       }
     ],
-    "name": "Wolf",
+    "name": "wolf*2",
     "pages": [
       {
         "conditions": {
