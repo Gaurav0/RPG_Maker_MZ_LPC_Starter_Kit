@@ -9,13 +9,68 @@
         "conditionType": 0,
         "rating": 5,
         "skillId": 1
+      }
+    ],
+    "battlerHue": 0,
+    "battlerName": "wolf_64_5",
+    "dropItems": [
+      {
+        "dataId": 1,
+        "denominator": 1,
+        "kind": 0
       },
       {
-        "skillId": 20,
-        "rating": 5,
-        "conditionType": 0,
+        "dataId": 1,
+        "denominator": 1,
+        "kind": 0
+      },
+      {
+        "dataId": 1,
+        "denominator": 1,
+        "kind": 0
+      }
+    ],
+    "exp": 0,
+    "traits": [
+      {
+        "code": 22,
+        "dataId": 0,
+        "value": 0.95
+      },
+      {
+        "code": 22,
+        "dataId": 1,
+        "value": 0.05
+      },
+      {
+        "code": 31,
+        "dataId": 1,
+        "value": 0
+      }
+    ],
+    "gold": 0,
+    "name": "wolf",
+    "note": "<characterName:enemies/wolf_64_5>\n<characterIndex:0>",
+    "params": [
+      100,
+      0,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
+    ]
+  },
+  {
+    "id": 2,
+    "actions": [
+      {
         "conditionParam1": 0,
-        "conditionParam2": 0
+        "conditionParam2": 0,
+        "conditionType": 0,
+        "rating": 5,
+        "skillId": 1
       }
     ],
     "battlerHue": 0,
@@ -37,7 +92,7 @@
         "kind": 0
       }
     ],
-    "exp": 10,
+    "exp": 0,
     "traits": [
       {
         "code": 22,
@@ -55,87 +110,18 @@
         "value": 0
       }
     ],
-    "gold": 5,
-    "name": "Goblin",
+    "gold": 0,
+    "name": "",
     "note": "",
     "params": [
-      200,
+      100,
       0,
-      25,
-      20,
-      20,
-      20,
-      20,
-      20
-    ]
-  },
-  {
-    "id": 2,
-    "actions": [
-      {
-        "conditionParam1": 0,
-        "conditionParam2": 0,
-        "conditionType": 0,
-        "rating": 5,
-        "skillId": 1
-      },
-      {
-        "skillId": 23,
-        "rating": 3,
-        "conditionType": 1,
-        "conditionParam1": 0,
-        "conditionParam2": 2
-      }
-    ],
-    "battlerHue": 0,
-    "battlerName": "Gnome",
-    "dropItems": [
-      {
-        "dataId": 1,
-        "denominator": 1,
-        "kind": 0
-      },
-      {
-        "dataId": 1,
-        "denominator": 1,
-        "kind": 0
-      },
-      {
-        "dataId": 1,
-        "denominator": 1,
-        "kind": 0
-      }
-    ],
-    "exp": 10,
-    "traits": [
-      {
-        "code": 22,
-        "dataId": 0,
-        "value": 0.95
-      },
-      {
-        "code": 22,
-        "dataId": 1,
-        "value": 0.05
-      },
-      {
-        "code": 31,
-        "dataId": 1,
-        "value": 0
-      }
-    ],
-    "gold": 8,
-    "name": "Gnome",
-    "note": "",
-    "params": [
-      250,
-      0,
-      20,
-      25,
-      20,
-      20,
-      20,
-      20
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
     ]
   },
   {
@@ -150,7 +136,7 @@
       }
     ],
     "battlerHue": 0,
-    "battlerName": "Crow",
+    "battlerName": "",
     "dropItems": [
       {
         "dataId": 1,
@@ -168,7 +154,7 @@
         "kind": 0
       }
     ],
-    "exp": 15,
+    "exp": 0,
     "traits": [
       {
         "code": 22,
@@ -178,7 +164,7 @@
       {
         "code": 22,
         "dataId": 1,
-        "value": 0.1
+        "value": 0.05
       },
       {
         "code": 31,
@@ -186,18 +172,18 @@
         "value": 0
       }
     ],
-    "gold": 8,
-    "name": "Crow",
+    "gold": 0,
+    "name": "",
     "note": "",
     "params": [
-      250,
-      50,
-      25,
-      20,
-      20,
-      20,
-      25,
-      20
+      100,
+      0,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
     ]
   },
   {
@@ -209,17 +195,10 @@
         "conditionType": 0,
         "rating": 5,
         "skillId": 1
-      },
-      {
-        "skillId": 52,
-        "rating": 4,
-        "conditionType": 2,
-        "conditionParam1": 0,
-        "conditionParam2": 0.3
       }
     ],
     "battlerHue": 0,
-    "battlerName": "Treant",
+    "battlerName": "",
     "dropItems": [
       {
         "dataId": 1,
@@ -237,7 +216,7 @@
         "kind": 0
       }
     ],
-    "exp": 30,
+    "exp": 0,
     "traits": [
       {
         "code": 22,
@@ -253,25 +232,20 @@
         "code": 31,
         "dataId": 1,
         "value": 0
-      },
-      {
-        "code": 11,
-        "dataId": 2,
-        "value": 2
       }
     ],
-    "gold": 15,
-    "name": "Treant",
+    "gold": 0,
+    "name": "",
     "note": "",
     "params": [
-      500,
-      50,
-      30,
-      20,
-      30,
-      30,
-      30,
-      30
+      100,
+      0,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
     ]
   },
   {
@@ -283,24 +257,10 @@
         "conditionType": 0,
         "rating": 5,
         "skillId": 1
-      },
-      {
-        "skillId": 99,
-        "rating": 4,
-        "conditionType": 1,
-        "conditionParam1": 0,
-        "conditionParam2": 2
-      },
-      {
-        "skillId": 13,
-        "rating": 6,
-        "conditionType": 2,
-        "conditionParam1": 0,
-        "conditionParam2": 0.3
       }
     ],
     "battlerHue": 0,
-    "battlerName": "Hi_monster",
+    "battlerName": "",
     "dropItems": [
       {
         "dataId": 1,
@@ -318,7 +278,7 @@
         "kind": 0
       }
     ],
-    "exp": 100,
+    "exp": 0,
     "traits": [
       {
         "code": 22,
@@ -334,25 +294,20 @@
         "code": 31,
         "dataId": 1,
         "value": 0
-      },
-      {
-        "code": 63,
-        "dataId": 1,
-        "value": 1
       }
     ],
-    "gold": 50,
-    "name": "Hi_monster",
+    "gold": 0,
+    "name": "",
     "note": "",
     "params": [
-      1000,
-      50,
-      40,
-      20,
-      40,
-      40,
-      40,
-      40
+      100,
+      0,
+      10,
+      10,
+      10,
+      10,
+      10,
+      10
     ]
   }
 ]

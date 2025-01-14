@@ -6845,7 +6845,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "Greg/Greg",
+            "characterName": "chars/Greg/Greg",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
@@ -6923,7 +6923,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "Sara/Sara",
+            "characterName": "chars/Sara/Sara",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
@@ -7000,11 +7000,11 @@
           },
           "directionFix": false,
           "image": {
-            "characterIndex": 7,
+            "tileId": 0,
             "characterName": "Doors/15 Panel Door A",
             "direction": 2,
             "pattern": 1,
-            "tileId": 0
+            "characterIndex": 7
           },
           "list": [
             {
@@ -7033,7 +7033,7 @@
                     {
                       "code": 15,
                       "parameters": [
-                        44
+                        20
                       ],
                       "indent": null
                     },
@@ -7078,7 +7078,7 @@
                 {
                   "code": 15,
                   "parameters": [
-                    44
+                    20
                   ],
                   "indent": null
                 }
@@ -7204,6 +7204,127 @@
       ],
       "x": 5,
       "y": 25
+    },
+    {
+      "id": 4,
+      "name": "wolf",
+      "note": "<type:enemy><id:1>",
+      "pages": [
+        {
+          "conditions": {
+            "actorId": 1,
+            "actorValid": false,
+            "itemId": 1,
+            "itemValid": false,
+            "selfSwitchCh": "A",
+            "selfSwitchValid": false,
+            "switch1Id": 43,
+            "switch1Valid": false,
+            "switch2Id": 1,
+            "switch2Valid": false,
+            "variableId": 46,
+            "variableValid": false,
+            "variableValue": 0
+          },
+          "directionFix": false,
+          "image": {
+            "tileId": 0,
+            "characterName": "enemies/wolf_64_5",
+            "direction": 2,
+            "pattern": 0,
+            "characterIndex": 0
+          },
+          "list": [
+            {
+              "code": 250,
+              "indent": 0,
+              "parameters": [
+                {
+                  "name": "artisticdude/mnstr8",
+                  "volume": 90,
+                  "pitch": 100,
+                  "pan": 0
+                }
+              ]
+            },
+            {
+              "code": 101,
+              "indent": 0,
+              "parameters": [
+                "",
+                0,
+                0,
+                2,
+                "Wolf"
+              ]
+            },
+            {
+              "code": 401,
+              "indent": 0,
+              "parameters": [
+                "I'm a monster. Let's fight!"
+              ]
+            },
+            {
+              "code": 201,
+              "indent": 0,
+              "parameters": [
+                0,
+                2,
+                3,
+                3,
+                6,
+                0
+              ]
+            },
+            {
+              "code": 357,
+              "indent": 0,
+              "parameters": [
+                "ThirdParty/SRPG/SRPG_core_MZ",
+                "StartEnd",
+                "Start/End SRPG battle",
+                {
+                  "key": "start"
+                }
+              ]
+            },
+            {
+              "code": 657,
+              "indent": 0,
+              "parameters": [
+                "Start/End toggle = start"
+              ]
+            },
+            {
+              "code": 0,
+              "indent": 0,
+              "parameters": []
+            }
+          ],
+          "moveFrequency": 3,
+          "moveRoute": {
+            "list": [
+              {
+                "code": 0,
+                "parameters": []
+              }
+            ],
+            "repeat": true,
+            "skippable": false,
+            "wait": false
+          },
+          "moveSpeed": 4,
+          "moveType": 2,
+          "priorityType": 1,
+          "stepAnime": false,
+          "through": false,
+          "trigger": 2,
+          "walkAnime": true
+        }
+      ],
+      "x": 30,
+      "y": 22
     }
   ]
 }

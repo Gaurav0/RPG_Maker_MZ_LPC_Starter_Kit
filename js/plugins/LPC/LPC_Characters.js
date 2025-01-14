@@ -14,57 +14,91 @@
 FSInitStart = SceneManager.initialize;
 SceneManager.initialize = function() {
     FSInitStart.call(this);
-    Graphics._switchStretchMode();
     Graphics._requestFullScreen();
+    if (!Graphics._stretchEnabled) {
+        Graphics._switchStretchMode();
+    }
 };
 
-const charParams = {
-    pw: 64,
-    ph: 64,
-    xo: 8,
-    yo: 8,
-    cx: 0,
-    cy: 8,
-    dxo: 0,
-    dyo: 0,
-    frames: 9,
-    frame0: 0,
-    step: 1,
-    ay: 0.875
-};
-
-const doorParams = {
-    pw: 64,
-    ph: 128,
-    xo: 22,
-    yo: 28,
-    cx: 0,
-    cy: 0,
-    dxo: 16,
-    dyo: 12,
-    frames: 4,
-    frame0: 3,
-    step: -1,
-    ay: 0.625
-};
+const params = {
+    "chars": {
+        pw: 64,
+        ph: 64,
+        xo: 8,
+        yo: 8,
+        cx: 0,
+        cy: 8,
+        dxo: 0,
+        dyo: 0,
+        frames: 9,
+        frame0: 0,
+        step: 1,
+        ay: 0.875
+    },
+    "doors": {
+        pw: 64,
+        ph: 128,
+        xo: 22,
+        yo: 28,
+        cx: 0,
+        cy: 0,
+        dxo: 16,
+        dyo: 12,
+        frames: 4,
+        frame0: 3,
+        step: -1,
+        ay: 0.625
+    },
+    "enemies": {
+        pw: 64,
+        ph: 64,
+        xo: 0,
+        yo: 0,
+        cx: 0,
+        cy: 0,
+        dxo: 0,
+        dyo: 0,
+        frames: 5,
+        frame0: 0,
+        step: 1,
+        ay: 0.667
+    },
+    "null": {}
+}
 
 // javascript doesn't do modulus correctly for negative numbers
 const mod = (n, m) => (n % m + m) % m;
 
-Game_CharacterBase.prototype.isDoor = function() {
-    return this._characterName.toLowerCase().includes('door');
+const paramType = function(characterName) {
+    if (!characterName || !characterName.includes('/')) {
+        return 'null';
+    }
+    return characterName.toLowerCase().split('/')[0];
 };
 
+Game_CharacterBase.prototype.paramType = function() {
+    return paramType(this._characterName);
+};
+
+Game_CharacterBase.prototype.isDoor = function() {
+    return this.paramType() === 'doors';
+}
+
 Game_CharacterBase.prototype.numFrames = function() {
-    return this.isDoor() ? doorParams.frames : charParams.frames;
+    if (this.paramType() === 'null') {
+        return 4;
+    }
+    return params[this.paramType()].frames;
 };
 
 Game_CharacterBase.prototype.frame0 = function() {
-    return this.isDoor() ? (this.isOpen() ? 0 : doorParams.frame0) : charParams.frame0;
+    const frame0 = params[this.paramType()].frame0;
+    return this.isDoor() ? (this.isOpen() ? 0 : frame0) : frame0;
 };
 
 Game_CharacterBase.prototype.step = function() {
-    return this.isDoor() ? (this.isOpen() ? 1 : doorParams.step) : charParams.step;
+    const step = params[this.paramType()].step;
+    return this.isDoor() ? (this.isOpen() ? 1 : step) : step;
 };
 
 const Game_CharacterBase_setImage = Game_CharacterBase.prototype.setImage;
@@ -90,7 +124,7 @@ Game_CharacterBase.prototype.updatePattern = function () {
 };
 
 Game_CharacterBase.prototype.animationWait = function () {
-    return 60 / this.numFrames();
+    return 30 / this.numFrames();
 };
 
 Game_Event.prototype.resetPattern = function () {
@@ -114,8 +148,7 @@ Game_CharacterBase.prototype.straighten = function () {
 
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);
-    this._isDoor = characterName.toLowerCase().includes('door');
-    const o = this._isDoor ? doorParams : charParams;
+    const o = params[paramType(characterName)];
     this._params = o;
     const { pw, ph, xo, yo } = o;
     const n = characterIndex;
@@ -126,16 +159,20 @@ Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x
     this.contents.blt(bitmap, sx, sy, pw, ph, dx, dy);
 };
 
+Sprite_Character.prototype.paramType = function() {
+    return paramType(this._character.characterName());
+};
+
 Sprite_Character.prototype.isDoor = function() {
-    return this._character.characterName().toLowerCase().includes('door');
+    return this.paramType() === "doors";
 };
 
 Sprite_Character.prototype.characterBlockX = function () {
-    return this.isDoor() ? doorParams.cx : charParams.cx;
+    return params[this.paramType()].cx;
 };
 
 Sprite_Character.prototype.characterBlockY = function () {
-    return this.isDoor() ? doorParams.cy : charParams.cy;
+    return params[this.paramType()].cy;
 };
 
 const LPC_directionMap = {
@@ -150,12 +187,20 @@ Sprite_Character.prototype.characterPatternY = function () {
     return LPC_directionMap[Sprite_Character_characterPatternY.call(this)];
 }
 
+const Sprite_Character_patternWidth = Sprite_Character.prototype.patternWidth;
 Sprite_Character.prototype.patternWidth = function () {
-    return this.isDoor() ? doorParams.pw : charParams.pw;
+    if (this.paramType() === 'null') {
+        return Sprite_Character_patternWidth.call(this);
+    }
+    return params[this.paramType()].pw;
 };
 
+const Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
 Sprite_Character.prototype.patternHeight = function () {
-    return this.isDoor() ? doorParams.ph : charParams.ph;
+    if (this.paramType() === 'null') {
+        return Sprite_Character_patternHeight.call(this);
+    }
+    return params[this.paramType()].ph;
 };
 
 Sprite_Character.prototype.updateCharacterFrame = function() {
@@ -176,13 +221,16 @@ Sprite_Character.prototype.updateCharacterFrame = function() {
 };
 
 Sprite_Character.prototype.characterOffsetX = function() {
-    return this.isDoor() ? doorParams.dxo : charParams.dxo;
+    return params[this.paramType()].dxo;
 };
 
 Sprite_Character.prototype.characterOffsetY = function() {
-    return this.isDoor() ? doorParams.dyo : charParams.dyo;
+    return params[this.paramType()].dyo;
 };
 
 Sprite_Character.prototype.anchorY = function() {
-    return this.isDoor() ? doorParams.ay : charParams.ay;
+    return params[this.paramType()].ay;
 }
+
+// Disable Animations for now
+Game_Temp.prototype.requestAnimation = function() {};
