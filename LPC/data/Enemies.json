@@ -30,7 +30,7 @@
         "kind": 0
       }
     ],
-    "exp": 0,
+    "exp": 1,
     "traits": [
       {
         "code": 22,
@@ -48,18 +48,18 @@
         "value": 0
       }
     ],
-    "gold": 0,
+    "gold": 1,
     "name": "wolf",
     "note": "<characterName:enemies/wolf_64_5>\n<characterIndex:0>",
     "params": [
       100,
       0,
-      10,
-      10,
-      10,
-      10,
-      10,
-      10
+      20,
+      20,
+      20,
+      20,
+      20,
+      20
     ]
   },
   {
