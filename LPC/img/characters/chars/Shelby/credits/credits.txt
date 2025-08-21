@@ -159,3 +159,83 @@ shield/heater/revised/trim/fg/steel.png
 	- Links:
 		- https://opengameart.org/content/lpc-shields
 
+weapon/sword/arming/universal/fg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/universal/bg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_slash/bg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_slash/fg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_backslash/bg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_backslash/fg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_halfslash/bg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
+weapon/sword/arming/attack_halfslash/fg/bronze.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+	- Authors:
+		- ElizaWy; walk and down by JaidynReiman
+	- Links:
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+
