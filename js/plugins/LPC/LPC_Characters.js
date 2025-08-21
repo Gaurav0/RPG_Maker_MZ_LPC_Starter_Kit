@@ -148,10 +148,6 @@ Game_CharacterBase.prototype.straighten = function () {
 
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);
-    bitmap.addLoadListener(this._drawCharacter.apply(this, arguments));
-};
-
-Window_Base.prototype._drawCharacter = function (characterName, characterIndex, x, y) {
     const o = params[paramType(characterName)];
     this._params = o;
     const { pw, ph, xo, yo } = o;
