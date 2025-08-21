@@ -1,5 +1,5 @@
 {
-  "exportTimestamp": "2025-08-21T19-23-29",
+  "exportTimestamp": "2025-08-21T19-45-14",
   "bodyType": "female",
   "standardAnimations": {
     "exported": [
@@ -22,7 +22,11 @@
     "failed": []
   },
   "customAnimations": {
-    "exported": [],
+    "exported": [
+      "slash_128",
+      "backslash_128",
+      "halfslash_128"
+    ],
     "failed": []
   },
   "frameSize": 64,

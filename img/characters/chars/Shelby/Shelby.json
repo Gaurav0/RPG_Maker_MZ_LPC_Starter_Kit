@@ -1,9 +1,9 @@
 {
   "bodyTypeName": "female",
-  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&sex=female&hair=Plain_blonde&updo=none_High_Bun&ponytail=Long_Topknot_blonde&jacket=Tabard_leather&legs=none_Pants&shoes=Basic_Shoes_leather&shield=Revised_Heater_Shield_Base_oak&shield_paint=none_Revised_Heater_Shield_Paint&shield_trim=Revised_Heater_Shield_Trim_steel",
+  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&sex=female&hair=Plain_blonde&updo=none_High_Bun&ponytail=Long_Topknot_blonde&jacket=Tabard_leather&legs=none_Pants&shoes=Basic_Shoes_leather&shield=Revised_Heater_Shield_Base_oak&shield_paint=none_Revised_Heater_Shield_Paint&shield_trim=Revised_Heater_Shield_Trim_steel&weapon=Arming_Sword_bronze",
   "spritesheets": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
   "version": 1,
-  "datetime": "8/21/2025, 3:09:18 PM",
+  "datetime": "8/21/2025, 3:44:42 PM",
   "credits": [
     {
       "fileName": "body/bodies/female/light.png",
@@ -81,6 +81,62 @@
       "authors": "bluecarrot16,Sander Frenken (castelonia),ElizaWy,JaidynReiman",
       "urls": "https://opengameart.org/content/lpc-shields",
       "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/universal/fg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/universal/bg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_slash/bg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_slash/fg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_backslash/bg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_backslash/fg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_halfslash/bg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_halfslash/fg/bronze.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "ElizaWy; walk and down by JaidynReiman",
+      "urls": "https://github.com/ElizaWy/LPC/tree/main/Characters/Props/Sword%2001%20-%20Arming%20Sword,https://opengameart.org/content/lpc-expanded-sit-run-jump-more",
+      "notes": ""
     }
   ],
   "layers": [
@@ -101,12 +157,47 @@
       "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
     },
     {
+      "fileName": "weapon/sword/arming/attack_slash/bg/bronze.png",
+      "zPos": 8,
+      "custom_animation": "slash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_backslash/bg/bronze.png",
+      "zPos": 8,
+      "custom_animation": "backslash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_halfslash/bg/bronze.png",
+      "zPos": 8,
+      "custom_animation": "halfslash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
       "fileName": "hair/extensions/ponytails/topknot_long/adult/bg/blonde.png",
       "zPos": 9,
       "parentName": "ponytail",
       "name": "Long_Topknot",
       "variant": "blonde",
       "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h/backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/universal/bg/bronze.png",
+      "zPos": 9,
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
     },
     {
       "fileName": "body/bodies/female/light.png",
@@ -171,6 +262,41 @@
       "name": "Long_Topknot",
       "variant": "blonde",
       "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h/backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/universal/fg/bronze.png",
+      "zPos": 140,
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_slash/fg/bronze.png",
+      "zPos": 150,
+      "custom_animation": "slash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_backslash/fg/bronze.png",
+      "zPos": 150,
+      "custom_animation": "backslash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "weapon/sword/arming/attack_halfslash/fg/bronze.png",
+      "zPos": 150,
+      "custom_animation": "halfslash_128",
+      "parentName": "weapon",
+      "name": "Arming_Sword",
+      "variant": "bronze",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
     }
   ]
 }
