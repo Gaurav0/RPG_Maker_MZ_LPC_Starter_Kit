@@ -1,0 +1,176 @@
+{
+  "bodyTypeName": "female",
+  "url": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/#?body=Body_color_light&head=Human_male_light&sex=female&hair=Plain_blonde&updo=none_High_Bun&ponytail=Long_Topknot_blonde&jacket=Tabard_leather&legs=none_Pants&shoes=Basic_Shoes_leather&shield=Revised_Heater_Shield_Base_oak&shield_paint=none_Revised_Heater_Shield_Paint&shield_trim=Revised_Heater_Shield_Trim_steel",
+  "spritesheets": "https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/spritesheets/",
+  "version": 1,
+  "datetime": "8/21/2025, 3:09:18 PM",
+  "credits": [
+    {
+      "fileName": "body/bodies/female/light.png",
+      "licenses": "OGA-BY 3.0,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "Benjamin K. Smith (BenCreating),bluecarrot16,TheraHedwig,Evert,MuffinElZangano,Durrani,Pierre Vigier (pvigier),ElizaWy,Matthew Krohn (makrohn),Johannes Sjölund (wulax),Stephen Challener (Redshrike)",
+      "urls": "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles,https://opengameart.org/content/lpc-medieval-fantasy-character-sprites,https://opengameart.org/content/lpc-ladies,https://opengameart.org/content/lpc-7-womens-shirts,https://opengameart.org/content/lpc-jump-expanded,https://opengameart.org/content/lpc-be-seated,https://opengameart.org/content/lpc-revised-character-basics,https://gitlab.com/vagabondgame/lpc-characters,https://opengameart.org/content/lpc-male-jumping-animation-by-durrani,https://opengameart.org/content/lpc-runcycle-and-diagonal-walkcycle",
+      "notes": "see details at https://opengameart.org/content/lpc-character-bases"
+    },
+    {
+      "fileName": "head/heads/human/male/light.png",
+      "licenses": "OGA-BY 3.0,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "bluecarrot16,Benjamin K. Smith (BenCreating),Stephen Challener (Redshrike)",
+      "urls": "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles,https://opengameart.org/content/lpc-character-bases",
+      "notes": "original head by Redshrike, tweaks by BenCreating, modular version by bluecarrot16"
+    },
+    {
+      "fileName": "hair/extensions/ponytails/topknot_long/adult/fg/blonde.png",
+      "licenses": "OGA-BY 3.0+,CC-BY 3.0+,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles",
+      "notes": ""
+    },
+    {
+      "fileName": "hair/extensions/ponytails/topknot_long/adult/bg/blonde.png",
+      "licenses": "OGA-BY 3.0+,CC-BY 3.0+,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-1-hairstyle-2-hair-extensions-3-previously-unofficially-released-hairstyles",
+      "notes": ""
+    },
+    {
+      "fileName": "hair/plain/adult/blonde.png",
+      "licenses": "OGA-BY 3.0,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "JaidynReiman,Manuel Riecke (MrBeast),Joe White",
+      "urls": "https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles,https://opengameart.org/content/ponytail-and-plain-hairstyles,https://opengameart.org/content/lpc-expanded-hair",
+      "notes": ""
+    },
+    {
+      "fileName": "torso/jacket/tabard/female/leather.png",
+      "licenses": "OGA-BY 3.0,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "JaidynReiman,Matthew Krohn (makrohn),Johannes Sjölund (wulax)",
+      "urls": "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites,https://opengameart.org/content/lpc-combat-armor-for-women,http://opengameart.org/content/lpc-clothing-updates",
+      "notes": "original by wulax, edited to female base by makrohn and JaidynReiman, edited to v3 base by bluecarrot16"
+    },
+    {
+      "fileName": "feet/shoes/basic/thin/leather.png",
+      "licenses": "OGA-BY 3.0,CC-BY-SA 3.0,GPL 3.0",
+      "authors": "JaidynReiman,Joe White,Johannes Sjölund (wulax)",
+      "urls": "https://opengameart.org/content/lpc-medieval-fantasy-character-sprites,http://opengameart.org/content/lpc-clothing-updates,https://opengameart.org/content/lpc-expanded-socks-shoes",
+      "notes": "original by wulax, edited for female base by Joe White, edited for v3 base by bluecarrot16, Jump/Sit/Emote/Run/Revised Combat by JaidynReiman"
+    },
+    {
+      "fileName": "shield/heater/revised/wood/bg/oak.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "bluecarrot16,Sander Frenken (castelonia),ElizaWy,JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-shields",
+      "notes": ""
+    },
+    {
+      "fileName": "shield/heater/revised/wood/fg/oak.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "bluecarrot16,Sander Frenken (castelonia),ElizaWy,JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-shields",
+      "notes": ""
+    },
+    {
+      "fileName": "shield/heater/revised/trim/bg/steel.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "bluecarrot16,Sander Frenken (castelonia),ElizaWy,JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-shields",
+      "notes": ""
+    },
+    {
+      "fileName": "shield/heater/revised/trim/fg/steel.png",
+      "licenses": "OGA-BY 3.0",
+      "authors": "bluecarrot16,Sander Frenken (castelonia),ElizaWy,JaidynReiman",
+      "urls": "https://opengameart.org/content/lpc-shields",
+      "notes": ""
+    }
+  ],
+  "layers": [
+    {
+      "fileName": "shield/heater/revised/wood/bg/oak.png",
+      "zPos": 2,
+      "parentName": "shield",
+      "name": "Revised_Heater_Shield_Base",
+      "variant": "oak",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "shield/heater/revised/trim/bg/steel.png",
+      "zPos": 6,
+      "parentName": "shield_trim",
+      "name": "Revised_Heater_Shield_Trim",
+      "variant": "steel",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "hair/extensions/ponytails/topknot_long/adult/bg/blonde.png",
+      "zPos": 9,
+      "parentName": "ponytail",
+      "name": "Long_Topknot",
+      "variant": "blonde",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h/backslash,1h_halfslash"
+    },
+    {
+      "fileName": "body/bodies/female/light.png",
+      "zPos": 10,
+      "parentName": "body",
+      "name": "Body_color",
+      "variant": "light",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "feet/shoes/basic/thin/leather.png",
+      "zPos": 15,
+      "parentName": "shoes",
+      "name": "Basic_Shoes",
+      "variant": "leather",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "torso/jacket/tabard/female/leather.png",
+      "zPos": 55,
+      "parentName": "jacket",
+      "name": "Tabard",
+      "variant": "leather",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering"
+    },
+    {
+      "fileName": "head/heads/human/male/light.png",
+      "zPos": 100,
+      "parentName": "head",
+      "name": "Human_male",
+      "variant": "light",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "shield/heater/revised/wood/fg/oak.png",
+      "zPos": 110,
+      "parentName": "shield",
+      "name": "Revised_Heater_Shield_Base",
+      "variant": "oak",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "shield/heater/revised/trim/fg/steel.png",
+      "zPos": 115,
+      "parentName": "shield_trim",
+      "name": "Revised_Heater_Shield_Trim",
+      "variant": "steel",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "hair/plain/adult/blonde.png",
+      "zPos": 120,
+      "parentName": "hair",
+      "name": "Plain",
+      "variant": "blonde",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h_backslash,1h_halfslash"
+    },
+    {
+      "fileName": "hair/extensions/ponytails/topknot_long/adult/fg/blonde.png",
+      "zPos": 128,
+      "parentName": "ponytail",
+      "name": "Long_Topknot",
+      "variant": "blonde",
+      "supportedAnimations": "spellcast,thrust,walk,slash,shoot,hurt,watering,idle,jump,run,sit,emote,climb,combat,1h_slash,1h/backslash,1h_halfslash"
+    }
+  ]
+}

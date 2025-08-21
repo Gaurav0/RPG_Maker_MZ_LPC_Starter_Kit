@@ -27,7 +27,7 @@ const params = {
         xo: 8,
         yo: 8,
         cx: 0,
-        cy: 8,
+        cy: 0,
         dxo: 0,
         dyo: 0,
         frames: 9,
