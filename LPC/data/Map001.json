@@ -6845,7 +6845,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "chars/Greg/Greg",
+            "characterName": "chars/Greg/standard/walk",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
@@ -6923,7 +6923,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "chars/Sara/Sara",
+            "characterName": "chars/Sara/standard/walk",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0

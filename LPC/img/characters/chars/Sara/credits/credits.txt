@@ -49,24 +49,12 @@ head/nose/straight/adult/light.png
 		- CC-BY-SA 3.0
 	- Authors:
 		- Thane Brimhall (pennomi)
+		- laetissima
 		- Matthew Krohn (makrohn)
 	- Links:
 		- https://opengameart.org/content/lpc-base-character-expressions
 
-eyes/human/adult/blue.png
-	- Note: original by Redshrike, mapped to all frames by Matthew Krohn & JaidynReiman
-	- Licenses:
-		- OGA-BY 3.0
-		- CC-BY-SA 3.0
-		- GPL 3.0
-	- Authors:
-		- JaidynReiman
-		- Matthew Krohn (makrohn)
-		- Stephen Challener (Redshrike)
-	- Links:
-		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
-
-hair/sara/female/blonde.png
+hair/sara/adult/fg/blonde.png
 	- Note: 
 	- Licenses:
 		- OGA-BY 3.0
@@ -79,6 +67,22 @@ hair/sara/female/blonde.png
 	- Links:
 		- https://opengameart.org/content/lpc-sara
 		- https://opengameart.org/content/lpc-hair
+		- https://opengameart.org/content/lpc-expanded-xlong-hair
+
+hair/sara/adult/bg/blonde.png
+	- Note: 
+	- Licenses:
+		- OGA-BY 3.0
+		- CC-BY 3.0
+	- Authors:
+		- Stephen Challener (Redshrike)
+		- William.Thompsonj
+		- Mandi Paugh
+		- bluecarrot16
+	- Links:
+		- https://opengameart.org/content/lpc-sara
+		- https://opengameart.org/content/lpc-hair
+		- https://opengameart.org/content/lpc-expanded-xlong-hair
 
 hat/formal/tiara/adult/tiara_silver.png
 	- Note: 
@@ -89,7 +93,7 @@ hat/formal/tiara/adult/tiara_silver.png
 		- Luke Mehl
 	- Links:
 		- https://opengameart.org/content/female-mage-clothing-set
-		- https://opengameart.org/content/expanded-ulpc-head-accessories-facial-assets-hats-helmets
+		- https://opengameart.org/content/lpc-expanded-hats-facial-helmets
 
 facial/earrings/simple/left/adult/blue.png
 	- Note: 
@@ -110,7 +114,7 @@ facial/earrings/simple/right/adult/blue.png
 		- https://opengameart.org/content/lpc-pirates
 
 torso/clothes/shortsleeve/shortsleeve/female/sky.png
-	- Note: original by ElizaWy walkcycle only; extended to all animations by adapting from longsleeve, edited to v3 bases by bluecarrot16
+	- Note: original by ElizaWy walkcycle only; extended to all animations by adapting from longsleeve, edited to v3 bases by bluecarrot16; cleanup and climb/jump/run/sit/emote/revised combat adapted from LPC Revised by JaidynReiman
 	- Licenses:
 		- OGA-BY 3.0
 		- CC-BY-SA 3.0
@@ -118,12 +122,16 @@ torso/clothes/shortsleeve/shortsleeve/female/sky.png
 	- Authors:
 		- bluecarrot16
 		- ElizaWy
+		- JaidynReiman
 		- Stephen Challener (Redshrike)
 	- Links:
 		- https://opengameart.org/content/liberated-pixel-cup-lpc-base-assets-sprites-map-tiles
 		- https://opengameart.org/content/lpc-7-womens-shirts
 		- http://opengameart.org/content/lpc-revised-character-basics
 		- http://opengameart.org/content/lpc-clothing-updates
+		- https://github.com/ElizaWy/LPC/tree/main/Characters/Clothing
+		- https://opengameart.org/content/lpc-expanded-sit-run-jump-more
+		- https://opengameart.org/content/lpc-expanded-simple-shirts
 
 torso/waist/waistband/female/rose.png
 	- Note: LPC Sara by Redshrike, contributed by William Thompsonj, Waistband Separated by Bluecarrot16
@@ -157,18 +165,5 @@ legs/skirts/straight/female/navy.png
 		- bluecarrot16
 		- ElizaWy
 	- Links:
-		- http://opengameart.org/content/lpc-clothing-updates
-
-feet/shoes/female/sara.png
-	- Note: original by wulax, edited for female base by Joe White, edited for v3 base by bluecarrot16
-	- Licenses:
-		- OGA-BY 3.0
-		- CC-BY-SA 3.0
-		- GPL 3.0
-	- Authors:
-		- Joe White
-		- Johannes Sjölund (wulax)
-	- Links:
-		- https://opengameart.org/content/lpc-medieval-fantasy-character-sprites
 		- http://opengameart.org/content/lpc-clothing-updates
 

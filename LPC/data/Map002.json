@@ -1155,7 +1155,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "chars/Shelby/Shelby",
+            "characterName": "chars/Shelby/standard/walk",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
