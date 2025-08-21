@@ -10,7 +10,8 @@
     "fontSize": 26,
     "mainFontFilename": "mplus-1m-regular.woff",
     "screenScale": 2,
-    "windowOpacity": 192
+    "windowOpacity": 192,
+    "picturesUpperLimit": 100
   },
   "airship": {
     "bgm": {
@@ -761,7 +762,7 @@
     "",
     ""
   ],
-  "versionId": 93547084,
+  "versionId": 99906130,
   "victoryMe": {
     "name": "",
     "pan": 0,
@@ -791,5 +792,12 @@
   ],
   "tileSize": 32,
   "optSplashScreen": false,
-  "optMessageSkip": true
+  "optMessageSkip": true,
+  "editor": {
+    "messageWidth1": 60,
+    "messageWidth2": 47,
+    "jsonFormatLevel": 1
+  },
+  "faceSize": 144,
+  "iconSize": 32
 }
