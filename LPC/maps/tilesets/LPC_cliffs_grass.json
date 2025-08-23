@@ -1,0 +1,15 @@
+{ "columns":12,
+ "image":"../../img/tilesets/LPC/LPC_cliffs_grass.png",
+ "imageheight":288,
+ "imagewidth":384,
+ "margin":0,
+ "name":"LPC_cliffs_grass",
+ "spacing":0,
+ "tilecount":108,
+ "tiledversion":"1.11.0",
+ "tileheight":32,
+ "tilewidth":32,
+ "transparentcolor":"#000000",
+ "type":"tileset",
+ "version":"1.10"
+}
