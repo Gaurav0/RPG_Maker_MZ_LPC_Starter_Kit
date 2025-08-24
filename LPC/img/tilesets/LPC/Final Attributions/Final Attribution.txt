@@ -332,6 +332,26 @@ Casper Nilsson
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
  - Red and Blue stairs
 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Animated Water Tiles and Waterfall
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ZaPaper
+https://opengameart.org/content/lpc-animated-water-and-waterfalls
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+  - Waterfall animation
+
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Cliffs and Mountains
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Evert
+https://opengameart.org/content/lpc-cliffsmountains-with-grass-top-and-more
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+  - Cliffs, Mountains, transition to grass top
+
+
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 Extensions Folder:
