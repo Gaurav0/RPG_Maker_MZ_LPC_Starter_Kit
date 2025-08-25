@@ -234,5 +234,57 @@ Sprite_Character.prototype.anchorY = function() {
     return params[this.paramType()].ay;
 }
 
-// Disable Animations for now
+// Disable Effekseeker Animations
 Game_Temp.prototype.requestAnimation = function() {};
+
+// Battler Motions for characters
+Sprite_Actor.MOTIONS = {
+    walk: { index: 0, loop: true, name: 'walk', frames: 9 },
+    wait: { index: 1, loop: true, name: 'idle', frames: 2 },
+    chant: { index: 2, loop: true },
+    guard: { index: 3, loop: true, name: 'combat_idle', frames: 2 },
+    damage: { index: 4, loop: false },
+    evade: { index: 5, loop: false },
+    thrust: { index: 6, loop: false, name: 'thrust', frames: 8 },
+    swing: { index: 7, loop: false, name: 'slash', frames: 6 },
+    missile: { index: 8, loop: false, name: 'shoot', frames: 13 },
+    skill: { index: 9, loop: false },
+    spell: { index: 10, loop: false, name: 'spellcast', frames: 7 },
+    item: { index: 11, loop: false },
+    escape: { index: 12, loop: true, name: 'run', mirror: true, frames: 8 },
+    victory: { index: 13, loop: true, name: 'emote', frames: 3 },
+    dying: { index: 14, loop: true },
+    abnormal: { index: 15, loop: true },
+    sleep: { index: 16, loop: true },
+    dead: { index: 17, loop: true, name: 'hurt', frames: 7 }
+};
+
+Sprite_Actor.prototype.setupMotion = function() {
+    if (this._actor.isMotionRequested()) {
+        const motionType = this._actor.motionType();
+        const motion = Sprite_Actor.MOTIONS[motionType];
+        if (motion.name) {
+            this.startMotion(this._actor.motionType());
+        }
+        this._actor.clearMotion();
+    }
+};
+
+Sprite_Character.prototype.motionBitmap = function(characterName, motionType) {
+    const motion = Sprite_Actor.MOTIONS[motionType];
+    const motionName = motion[motionType].name;
+    if (motionName) {
+        const filename = characterName + '/standard/' + motionName;
+        const bitmap = ImageManager.loadCharacter(filename);
+        return bitmap;
+    }
+};
+
+const Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
+Game_BattlerBase.prototype.srpgShowResults = function() {
+    if (this.isActor() && this.currentAction()) {
+        //this.performAction(this.currentAction());
+        this.performAttack();
+    }
+    Game_BattlerBase_prototype_srpgShowResults.call(this);
+};
