@@ -238,6 +238,8 @@ Sprite_Character.prototype.anchorY = function() {
 Game_Temp.prototype.requestAnimation = function() {};
 
 // Battler Motions for characters
+// This is largely based on battler motions for actors
+// from rmmz_sprites.js
 Sprite_Character.MOTIONS = {
     walk: { index: 0, loop: true, name: 'walk', frames: 9 },
     wait: { index: 1, loop: true, name: 'idle', frames: 2 },
@@ -265,12 +267,13 @@ Sprite_Character.prototype.initialize = function() {
     this._motion = null;
     this._motionType = null;
     this._motionBitmap = null;
+    this._motionRefresh = false;
 };
 
-Sprite_Character.prototype.setupMotion = function(motionType) {
-    this.setupMotionBitmap(this._actor.characterName(), motionType);
+Sprite_Character.prototype.playMotion = function(motionType) {
+    this.setupMotionBitmap(this._character.characterName(), motionType);
     this.requestMotion(motionType);
-    const motion = Sprite_Actor.MOTIONS[motionType];
+    const motion = Sprite_Character.MOTIONS[motionType];
     if (motion.name) {
         this.startMotion(motionType);
     }
@@ -281,7 +284,7 @@ Sprite_Character.prototype.isMotionRequested = function() {
 };
 
 Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionType) {
-    const motion = Sprite_Actor.MOTIONS[motionType];
+    const motion = Sprite_Character.MOTIONS[motionType];
     const motionName = motion.name;
     if (motionName) {
         const filename = characterName + '../../standard/' + motionName;
@@ -299,9 +302,56 @@ Sprite_Character.prototype.startMotion = function(motionType) {
     if (this._motion !== newMotion) {
         this._motion = newMotion;
         this._motionCount = 0;
-        this._pattern = 1;
+        this._pattern = 0;
     }
 };
+
+Sprite_Character.prototype.updateMotionCount = function() {
+    if (this._motion && ++this._motionCount >= this.motionSpeed()) {
+        if (this._motion.loop) {
+            this._pattern = (this._pattern + 1) % this._motion.frames;
+        } else if (this._pattern < 2) {
+            this._pattern++;
+        } else {
+            this.refreshMotion();
+        }
+        this._motionCount = 0;
+    }
+};
+
+Sprite_Character.prototype.motionSpeed = function() {
+    return 12;
+};
+
+Sprite_Character.prototype.updateMotion = function() {
+    if (this.isMotionRefreshRequested()) {
+        this.refreshMotion();
+        this.clearMotion();
+    } else {
+        this.updateMotionCount();
+    }
+};
+
+Sprite_Character.prototype.clearMotion = function() {
+    this._motion = null;
+};
+
+Sprite_Character.prototype.refreshMotion = function() {
+    this._motionCount = 0;
+    this._pattern = 0;
+};
+
+Sprite_Character.prototype.isMotionRefreshRequested = function() {
+    return this._motionRefresh;
+};
+
+Sprite_Character.prototype.requestMotionRefresh = function() {
+    this._motionRefresh = true;
+};
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 const Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
 Game_BattlerBase.prototype.srpgShowResults = function() {
@@ -311,7 +361,11 @@ Game_BattlerBase.prototype.srpgShowResults = function() {
         const actor = $gameActors.actor(actorId);
         const spriteActor = new Sprite_Character(actor);
         spriteActor._actor = actor;
-        spriteActor.setupMotion(this.motionType());
+        spriteActor.playMotion(this.motionType());
+        if (spriteActor._motion) {
+            this.currentAction().item().meta.animationDelay =
+                spriteActor.motionSpeed() * spriteActor._motion.frames;
+        }
     }
     Game_BattlerBase_prototype_srpgShowResults.call(this);
 };
