@@ -238,7 +238,7 @@ Sprite_Character.prototype.anchorY = function() {
 Game_Temp.prototype.requestAnimation = function() {};
 
 // Battler Motions for characters
-Sprite_Actor.MOTIONS = {
+Sprite_Character.MOTIONS = {
     walk: { index: 0, loop: true, name: 'walk', frames: 9 },
     wait: { index: 1, loop: true, name: 'idle', frames: 2 },
     chant: { index: 2, loop: true },
@@ -259,32 +259,59 @@ Sprite_Actor.MOTIONS = {
     dead: { index: 17, loop: true, name: 'hurt', frames: 7 }
 };
 
-Sprite_Actor.prototype.setupMotion = function() {
-    if (this._actor.isMotionRequested()) {
-        const motionType = this._actor.motionType();
-        const motion = Sprite_Actor.MOTIONS[motionType];
-        if (motion.name) {
-            this.startMotion(this._actor.motionType());
-        }
-        this._actor.clearMotion();
+const Sprite_Character_initialize = Sprite_Character.prototype.initialize;
+Sprite_Character.prototype.initialize = function() {
+    Sprite_Character_initialize.apply(this, arguments);
+    this._motion = null;
+    this._motionType = null;
+    this._motionBitmap = null;
+};
+
+Sprite_Character.prototype.setupMotion = function(motionType) {
+    this.setupMotionBitmap(this._actor.characterName(), motionType);
+    this.requestMotion(motionType);
+    const motion = Sprite_Actor.MOTIONS[motionType];
+    if (motion.name) {
+        this.startMotion(motionType);
     }
 };
 
-Sprite_Character.prototype.motionBitmap = function(characterName, motionType) {
+Sprite_Character.prototype.isMotionRequested = function() {
+    return this._motionType !== null;
+};
+
+Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionType) {
     const motion = Sprite_Actor.MOTIONS[motionType];
-    const motionName = motion[motionType].name;
+    const motionName = motion.name;
     if (motionName) {
-        const filename = characterName + '/standard/' + motionName;
+        const filename = characterName + '../../standard/' + motionName;
         const bitmap = ImageManager.loadCharacter(filename);
-        return bitmap;
+        this._motionBitmap = bitmap;
+    }
+};
+
+Sprite_Character.prototype.requestMotion = function(motionType) {
+    this._motionType = motionType;
+};
+
+Sprite_Character.prototype.startMotion = function(motionType) {
+    const newMotion = Sprite_Character.MOTIONS[motionType];
+    if (this._motion !== newMotion) {
+        this._motion = newMotion;
+        this._motionCount = 0;
+        this._pattern = 1;
     }
 };
 
 const Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
 Game_BattlerBase.prototype.srpgShowResults = function() {
     if (this.isActor() && this.currentAction()) {
-        //this.performAction(this.currentAction());
-        this.performAttack();
+        this.performAction(this.currentAction());
+        const actorId = this.actor().id;
+        const actor = $gameActors.actor(actorId);
+        const spriteActor = new Sprite_Character(actor);
+        spriteActor._actor = actor;
+        spriteActor.setupMotion(this.motionType());
     }
     Game_BattlerBase_prototype_srpgShowResults.call(this);
 };
