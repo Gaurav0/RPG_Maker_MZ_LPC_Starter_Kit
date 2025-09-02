@@ -34,7 +34,8 @@ Sprite_Character.MOTIONS = {
     dying: { index: 14, loop: true },
     abnormal: { index: 15, loop: true },
     sleep: { index: 16, loop: true },
-    dead: { index: 17, loop: true, name: 'hurt', frames: 7 }
+    dead: { index: 17, loop: true, name: 'hurt', frames: 7 },
+    attack: { index: 18, loop: false, name: 'attack', frames: 5 }
 };
 
 const LPC_Motions_Sprite_Character_initialize = Sprite_Character.prototype.initialize;
@@ -64,7 +65,14 @@ Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionTyp
     if (motionName) {
         this._originalCharacterName = this._characterName;
         this._originalBitmap = this._bitmap;
-        const filename = characterName + '/../../standard/' + motionName;
+        let filename;
+        if (characterName.includes('/standard/')) {
+            filename = characterName + '/../../standard/' + motionName;
+        } else if (characterName.includes('/custom/')) {
+            filename = characterName + '/../../custom/' + motionName;
+        } else {
+            filename = characterName + '/../' + motionName;
+        }
         const bitmap = ImageManager.loadCharacter(filename);
         this._motionBitmap = bitmap;
         this._characterName = filename;
@@ -156,15 +164,23 @@ const LPC_Motions_Scene_Map_prototype_srpgInvokeMapSkill = Scene_Map.prototype.s
 Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
     const user = data.user;
 
-    if (data.phase === 'animation' && user && user.isActor() && !user.isEnemy() && user.currentAction()) {
+    if (data.phase === 'animation' && user && user.currentAction()) {
         user.performAction(user.currentAction());
-        const gameActor = $gameActors.actor(user.actorId());
-        const char = gameActor.character();
-        const spriteActor = char._sprite;
-        spriteActor.playMotion(user.motionType());
-        if (spriteActor._motion) {
+        let gameActor, gameEnemy, char, sprite;
+        if (user.isActor()) {
+            gameActor = $gameActors.actor(user.actorId());
+            char = gameActor.character();
+            sprite = char._sprite;
+            sprite.playMotion(user.motionType());
+        } else if (user.isEnemy()) {
+            gameEnemy = $gameMap.event(user._eventId);
+            char = gameEnemy.unit();
+            sprite = gameEnemy._sprite;
+            sprite.playMotion("attack");
+        }
+        if (sprite._motion) {
             user.currentAction().item().meta.animationDelay =
-                spriteActor.motionSpeed() * spriteActor._motion.frames;
+                sprite.motionSpeed() * sprite._motion.frames;
         }
     }
 
@@ -232,6 +248,21 @@ Game_Actor.prototype.character = function() {
             });
             return event;
         }
+    }
+    return null;
+};
+
+Game_Event.prototype.unit = function() {
+    if (this._unit) {
+        return this._unit;
+    }
+    const unit = $gameSystem.EventToUnit(this._eventId);
+    if (unit) {
+        Object.defineProperty(this, '_unit', {
+            value: unit[1],
+            enumerable: false
+        });
+        return unit[1];
     }
     return null;
 };

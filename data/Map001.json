@@ -7229,7 +7229,7 @@
           "directionFix": false,
           "image": {
             "tileId": 0,
-            "characterName": "enemies/wolf_64_5",
+            "characterName": "enemies/wolf_64_5/walk",
             "direction": 2,
             "pattern": 0,
             "characterIndex": 0
