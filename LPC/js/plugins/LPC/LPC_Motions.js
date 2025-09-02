@@ -152,16 +152,23 @@ Sprite_Character.prototype.updateCharacterFrame = function() {
     LPC_Motions_Sprite_Character_prototype_updateCharacterFrame.call(this);
 };
 
-const LPC_Motions_Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
-Game_BattlerBase.prototype.srpgShowResults = function() {
-    if (this.isActor() && !this.isEnemy() && this.currentAction()) {
-        this.performAction(this.currentAction());
-        const actor = $gameActors.actor(this.actorId());
-        const char = actor.character();
+const LPC_Motions_Scene_Map_prototype_srpgInvokeMapSkill = Scene_Map.prototype.srpgInvokeMapSkill;
+Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
+    const user = data.user;
+
+    if (data.phase === 'animation' && user && user.isActor() && !user.isEnemy() && user.currentAction()) {
+        user.performAction(user.currentAction());
+        const gameActor = $gameActors.actor(user.actorId());
+        const char = gameActor.character();
         const spriteActor = char._sprite;
-        spriteActor.playMotion(this.motionType());
+        spriteActor.playMotion(user.motionType());
+        if (spriteActor._motion) {
+            user.currentAction().item().meta.animationDelay =
+                spriteActor.motionSpeed() * spriteActor._motion.frames;
+        }
     }
-    LPC_Motions_Game_BattlerBase_prototype_srpgShowResults.call(this);
+
+    LPC_Motions_Scene_Map_prototype_srpgInvokeMapSkill.call(this, data);
 };
 
 const LPC_Motions_Spriteset_Map_prototype_createCharacters = Spriteset_Map.prototype.createCharacters;
