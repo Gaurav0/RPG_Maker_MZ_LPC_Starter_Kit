@@ -297,8 +297,8 @@ Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionTyp
         const bitmap = ImageManager.loadCharacter(filename);
         this._motionBitmap = bitmap;
         this._characterName = filename;
-        this.setCharacterBitmap();
         this._bitmap = this._motionBitmap;
+        this.setCharacterBitmap();
     }
 };
 
@@ -314,23 +314,32 @@ Sprite_Character.prototype.startMotion = function(motionType) {
         this._motionCount = 0;
         this._pattern = 0;
         this._bitmap = this._motionBitmap;
+        this.setCharacterBitmap();
     }
 };
 
 Sprite_Character.prototype.updateMotionCount = function() {
     if (this._motion && ++this._motionCount >= this.motionSpeed()) {
-        this._pattern = (this._pattern + 1) % this._motion.frames;
-        if (this._motion.loop) {
-            // continue looping
-        } else {
-            this.requestMotionRefresh();
+        if (++this._pattern === this._motion.frames) {
+            this._pattern = 0;
+            if (!this._motion.loop) {
+                this.requestMotionRefresh();
+            }
         }
         this._motionCount = 0;
     }
 };
 
+const LPC_Motions_Sprite_Character_prototype_characterPatternX = Sprite_Character.prototype.characterPatternX;
+Sprite_Character.prototype.characterPatternX = function() {
+    if (this._motion) {
+        return this._pattern;
+    }
+    return LPC_Motions_Sprite_Character_prototype_characterPatternX.call(this);
+};
+
 Sprite_Character.prototype.motionSpeed = function() {
-    return 1;
+    return 30;
 };
 
 Sprite_Character.prototype.updateMotion = function() {
@@ -347,8 +356,8 @@ Sprite_Character.prototype.clearMotion = function() {
     this._motion = null;
     this._motionBitmap = null;
     this._characterName = this._originalCharacterName;
-    this.setCharacterBitmap();
     this._bitmap = this._originalBitmap;
+    this.setCharacterBitmap();
 };
 
 Sprite_Character.prototype.refreshMotion = function() {
@@ -377,13 +386,9 @@ Game_BattlerBase.prototype.srpgShowResults = function() {
     if (this.isActor() && !this.isEnemy() && this.currentAction()) {
         this.performAction(this.currentAction());
         const actor = $gameActors.actor(this.actorId());
-        const spriteActor = actor.character()._sprite;
-        spriteActor._actor = actor;
+        const char = actor.character();
+        const spriteActor = char._sprite;
         spriteActor.playMotion(this.motionType());
-        if (spriteActor._motion) {
-            this.currentAction().item().meta.animationDelay =
-                spriteActor.motionSpeed() * spriteActor._motion.frames;
-        }
     }
     Game_BattlerBase_prototype_srpgShowResults.call(this);
 };
@@ -398,6 +403,8 @@ Spriteset_Map.prototype.createCharacters = function() {
                 value: sprite,
                 enumerable: false
             });
+        } else {
+            sprite._character._sprite = sprite;
         }
     }
 };
@@ -417,9 +424,16 @@ Spriteset_Map.prototype.addCharacter = function(event) {
 };
 
 Game_Character.prototype.actor = function() {
+    if (this._actor) {
+        return this._actor;
+    }
     const unit = $gameSystem.EventToUnit(this._eventId);
     if (unit) {
         if (unit[0] === 'actor') {
+            Object.defineProperty(this, '_actor', {
+                value: unit[1],
+                enumerable: false
+            });
             return unit[1];
         }
     }
@@ -427,10 +441,17 @@ Game_Character.prototype.actor = function() {
 };
 
 Game_Actor.prototype.character = function() {
+    if (this._character) {
+        return this._character;
+    }
     const events = $gameMap.events();
     for (let i = 0; i < events.length; i++) {
         const event = events[i];
         if (event && event.actor && event.actor() === this) {
+            Object.defineProperty(this, '_character', {
+                value: event,
+                enumerable: false
+            });
             return event;
         }
     }
