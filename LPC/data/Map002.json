@@ -665,7 +665,7 @@
               "parameters": [
                 {
                   "name": "battleThemeA",
-                  "volume": 90,
+                  "volume": 30,
                   "pitch": 100,
                   "pan": 0
                 }
