@@ -103,9 +103,9 @@ Game_CharacterBase.prototype.step = function() {
     return this.isDoor() ? (this.isOpen() ? 1 : step) : step;
 };
 
-const Game_CharacterBase_setImage = Game_CharacterBase.prototype.setImage;
+const LPC_Characters_Game_CharacterBase_setImage = Game_CharacterBase.prototype.setImage;
 Game_CharacterBase.prototype.setImage = function() {
-    Game_CharacterBase_setImage.apply(this, arguments);
+    LPC_Characters_Game_CharacterBase_setImage.apply(this, arguments);
     this.resetPattern();
 };
 
@@ -184,23 +184,23 @@ const LPC_directionMap = {
     3: 0
 };
 
-const Sprite_Character_characterPatternY = Sprite_Character.prototype.characterPatternY;
+const LPC_Characters_Sprite_Character_characterPatternY = Sprite_Character.prototype.characterPatternY;
 Sprite_Character.prototype.characterPatternY = function () {
-    return LPC_directionMap[Sprite_Character_characterPatternY.call(this)];
+    return LPC_directionMap[LPC_Characters_Sprite_Character_characterPatternY.call(this)];
 }
 
-const Sprite_Character_patternWidth = Sprite_Character.prototype.patternWidth;
+const LPC_Characters_Sprite_Character_patternWidth = Sprite_Character.prototype.patternWidth;
 Sprite_Character.prototype.patternWidth = function () {
     if (this.paramType() === 'null') {
-        return Sprite_Character_patternWidth.call(this);
+        return LPC_Characters_Sprite_Character_patternWidth.call(this);
     }
     return params[this.paramType()].pw;
 };
 
-const Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
+const LPC_Characters_Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
 Sprite_Character.prototype.patternHeight = function () {
     if (this.paramType() === 'null') {
-        return Sprite_Character_patternHeight.call(this);
+        return LPC_Characters_Sprite_Character_patternHeight.call(this);
     }
     return params[this.paramType()].ph;
 };

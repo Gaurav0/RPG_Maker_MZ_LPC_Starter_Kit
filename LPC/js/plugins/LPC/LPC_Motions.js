@@ -37,9 +37,9 @@ Sprite_Character.MOTIONS = {
     dead: { index: 17, loop: true, name: 'hurt', frames: 7 }
 };
 
-const Sprite_Character_initialize = Sprite_Character.prototype.initialize;
+const LPC_Motions_Sprite_Character_initialize = Sprite_Character.prototype.initialize;
 Sprite_Character.prototype.initialize = function() {
-    Sprite_Character_initialize.apply(this, arguments);
+    LPC_Motions_Sprite_Character_initialize.apply(this, arguments);
     this._motion = null;
     this._motionType = null;
     this._motionBitmap = null;
@@ -152,7 +152,7 @@ Sprite_Character.prototype.updateCharacterFrame = function() {
     LPC_Motions_Sprite_Character_prototype_updateCharacterFrame.call(this);
 };
 
-const Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
+const LPC_Motions_Game_BattlerBase_prototype_srpgShowResults = Game_BattlerBase.prototype.srpgShowResults;
 Game_BattlerBase.prototype.srpgShowResults = function() {
     if (this.isActor() && !this.isEnemy() && this.currentAction()) {
         this.performAction(this.currentAction());
@@ -161,12 +161,12 @@ Game_BattlerBase.prototype.srpgShowResults = function() {
         const spriteActor = char._sprite;
         spriteActor.playMotion(this.motionType());
     }
-    Game_BattlerBase_prototype_srpgShowResults.call(this);
+    LPC_Motions_Game_BattlerBase_prototype_srpgShowResults.call(this);
 };
 
-Spriteset_Map_prototype_createCharacters = Spriteset_Map.prototype.createCharacters;
+const LPC_Motions_Spriteset_Map_prototype_createCharacters = Spriteset_Map.prototype.createCharacters;
 Spriteset_Map.prototype.createCharacters = function() {
-    Spriteset_Map_prototype_createCharacters.call(this);
+    LPC_Motions_Spriteset_Map_prototype_createCharacters.call(this);
     for (let i = 0; i < this._characterSprites.length; i++) {
         const sprite = this._characterSprites[i];
         if (!sprite._character._sprite) {
@@ -180,9 +180,9 @@ Spriteset_Map.prototype.createCharacters = function() {
     }
 };
 
-Spriteset_Map_prototype_addCharacter = Spriteset_Map.prototype.addCharacter;
+const LPC_Motions_Spriteset_Map_prototype_addCharacter = Spriteset_Map.prototype.addCharacter;
 Spriteset_Map.prototype.addCharacter = function(event) {
-    Spriteset_Map_prototype_addCharacter.call(this, event);
+    LPC_Motions_Spriteset_Map_prototype_addCharacter.call(this, event);
     for (let i = 0; i < this._characterSprites.length; i++) {
         const sprite = this._characterSprites[i];
         if (!sprite._character._sprite) {
