@@ -63,21 +63,13 @@ Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionTyp
     const motion = Sprite_Character.MOTIONS[motionType];
     const motionName = motion.name;
     if (motionName) {
-        this._originalCharacterName = this._characterName;
+        this._originalCharacterName = this._character._characterName;
         this._originalBitmap = this._bitmap;
-        let filename;
-        if (characterName.includes('/standard/')) {
-            filename = characterName + '/../../standard/' + motionName;
-        } else if (characterName.includes('/custom/')) {
-            filename = characterName + '/../../custom/' + motionName;
-        } else {
-            filename = characterName + '/../' + motionName;
-        }
+        const filename = characterName.substring(0, characterName.lastIndexOf('/')) + '/' + motionName;
         const bitmap = ImageManager.loadCharacter(filename);
         this._motionBitmap = bitmap;
-        this._characterName = filename;
+        this._character._characterName = filename;
         this._bitmap = this._motionBitmap;
-        this.setCharacterBitmap();
     }
 };
 
@@ -92,8 +84,6 @@ Sprite_Character.prototype.startMotion = function(motionType) {
         this.setupMotionBitmap(this._character.characterName(), motionType);
         this._motionCount = 0;
         this._pattern = 0;
-        this._bitmap = this._motionBitmap;
-        this.setCharacterBitmap();
     }
 };
 
@@ -118,7 +108,7 @@ Sprite_Character.prototype.characterPatternX = function() {
 };
 
 Sprite_Character.prototype.motionSpeed = function() {
-    return 30;
+    return 12;
 };
 
 Sprite_Character.prototype.updateMotion = function() {
@@ -134,9 +124,8 @@ Sprite_Character.prototype.updateMotion = function() {
 Sprite_Character.prototype.clearMotion = function() {
     this._motion = null;
     this._motionBitmap = null;
-    this._characterName = this._originalCharacterName;
+    this._character._characterName = this._originalCharacterName;
     this._bitmap = this._originalBitmap;
-    this.setCharacterBitmap();
 };
 
 Sprite_Character.prototype.refreshMotion = function() {
