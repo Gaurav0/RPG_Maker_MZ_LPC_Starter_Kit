@@ -8,7 +8,7 @@ The most widely used 2D RPG game engine at the moment is RPG Maker MZ. This proj
 
 Play it now in your browser at https://gaurav0.github.io/RPG_Maker_MZ_LPC_Starter_Kit
 
-Contributions welcome. All non-third party code in this repository is under the MIT license. RPG Maker Core scripts are commercially licensed without royalty and with source code available, all other code in this repository is open source under various licenses. There is no GPL/copyleft code.
+Contributions welcome. All non-third party code in this repository is under the MIT license subject to RPG Maker MZ terms of use. RPG Maker Core scripts are commercially licensed without royalty and with source code available, all other code in this repository is open source under various licenses. There is no GPL/copyleft code.
 
 ## Software Required
 
@@ -47,6 +47,8 @@ To view the map, open the map in TileD. You can export the map as an image to us
 YES. Everything in this repository other than RPG Maker MZ core scripts is open source. Please observe the terms of all the licenses for each RPG Maker MZ plugin and all of the art in the repository. Please attribute where required. Feel free to use my Credits screen and add to it.
 
 Payment is only required for RPG Maker MZ base software. There is no royalty, just a one time payment per user. See license for RPG Maker MZ for further information.
+
+Regardless of whether explicitly stated in each file, consider the code in this repository as derivative of RPG Maker MZ and subject to its terms of use. Do not use, modify, or distribute your modifications unless you have purchased RPG Maker MZ for each user.
 
 Only interested in the art? Find it under the Liberated Pixel Cup Project at OpenGameArt.org 
 

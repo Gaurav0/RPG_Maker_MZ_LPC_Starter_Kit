@@ -3,7 +3,9 @@
 //=============================================================================
 //  Version: 1.0.0
 //  Date: 1 September 2025
-//  Released under MIT license
+//  Derivative of code from RPG Maker MZ
+//  Released under its terms of use,
+//  but otherwise free to use, modify and distribute under MIT License
 //  http://opensource.org/licenses/mit-license.php
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
