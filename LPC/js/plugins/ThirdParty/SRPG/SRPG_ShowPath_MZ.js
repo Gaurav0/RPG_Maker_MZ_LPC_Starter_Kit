@@ -9,14 +9,8 @@
  * @target MZ
  * @plugindesc SRPG move path indicator, edited by OhisamaCraft.
  * @author Dr. Q
- *
- *
- * @param Path Image
- * @desc Image to build the path from
- * @require 1
- * @dir img/system/
- * @type file
- * @default srpgPath
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
  *
  * @param Path Blend Mode
  * @desc Blend mode for the move path
@@ -59,11 +53,80 @@
  *
  *
  * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
  * Draw an arrow to indicate the movement path in SRPG battles.
  * Images used for the paths go in the img/system/ folder.
+ * /!/ caution /!/
+ * Since the RPG maker MZ specification does not support 
+ * encryption and unused file deletion tools, 
+ * srpgPath image file is specified in SRPG core MZ.js.
  *
  * Look at srpgPath_Arrows.png for a clear example of how each piece
  * is used to make the path.
+ * 
+ */
+
+/*:ja
+ * @target MZ
+ * @plugindesc SRPG戦闘でアクターの移動経路を表示します。おひさまクラフトによる改変あり。
+ * @author Dr. Q
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
+ *
+ * @param Path Blend Mode
+ * @desc 移動経路の画像のブレンドモード
+ * @type select
+ * @option 通常
+ * @value 0
+ * @option 加算
+ * @value 1
+ * @option 乗算
+ * @value 2
+ * @option スクリーン
+ * @value 3
+ * @default 0
+ *
+ * @param Path Opacity
+ * @desc 移動経路の画像の透明度
+ * @type number
+ * @min 0
+ * @max 255
+ * @default 255
+ *
+ * @param Path Layer
+ * @desc 移動経路の画像をイベントに対してどの位置に表示するか
+ * @type select
+ * @option 全てのイベントの下
+ * @value 0
+ * @option プレイヤーの下
+ * @value 2
+ * @option プレイヤーの上
+ * @value 4
+ * @option 全てのイベントの上
+ * @value 6
+ * @default 2
+ *
+ * @param Max Path Length
+ * @desc 移動経路の画像の最大表示距離
+ * 移動範囲が 99 を超えない限り、変更しなくても大丈夫です。
+ * @type number
+ * @default 99
+ *
+ *
+ * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
+ * SRPG戦闘で、移動経路を示す矢印を描きます。
+ * srpgPathの画像はimg/system/フォルダにあります。
+ * /!/ 注意 /!/
+ * RPGツクールMZの仕様により暗号化および未使用ファイル削除ツールに対応できないため
+ * srpgPathの画像ファイルはSRPG core MZ.jsで指定しています。
+ *
+ * 自分で画像を作成する場合、パーツの配置はsrpgPath.pngを参考にして下さい。
+ * 
  */
 
 //====================================================================
@@ -81,8 +144,9 @@ Sprite_SrpgMovePath.prototype.constructor = Sprite_SrpgMovePath;
 //====================================================================
 (function(){
 	var parameters = PluginManager.parameters('SRPG_ShowPath_MZ');
+	var coreParameters = PluginManager.parameters('SRPG_core_MZ');
 
-	var _fileName = parameters['Path Image'] || "srpgPath";
+	var _fileName = coreParameters['Path Image'] || "srpgPath";
 	var _blendMode = Number(parameters['Path Blend Mode']) || 0;
 	var _opacity = Number(parameters['Path Opacity']) || 0;
 	var _layer = Number(parameters['Path Layer']) || 0;
@@ -96,6 +160,7 @@ Sprite_SrpgMovePath.prototype.constructor = Sprite_SrpgMovePath;
 	Game_Temp.prototype.showRoute = function(destX, destY) {
 		this._activeRoute = [];
 		if (destX == undefined || destY == undefined) return;
+		if (destX < 0 || destX >= $gameMap.width() || destY < 0 || destY >= $gameMap.height()) return;
 		var moveTable = $gameTemp.MoveTable(destX, destY);
 		var list = $gameTemp.moveList();
 		if (!moveTable || !list || !list[0]) return;
@@ -140,13 +205,11 @@ Sprite_SrpgMovePath.prototype.constructor = Sprite_SrpgMovePath;
 	}
 
 	// clear the route/AoE when you cancel movement/targeting
-	var _updateCallMenu = Scene_Map.prototype.updateCallMenu;
-	Scene_Map.prototype.updateCallMenu = function() {
-		_updateCallMenu.call(this);
-		if ($gameSystem.isSRPGMode() && (Input.isTriggered('cancel') || TouchInput.isCancelled())) {
-			if ($gameSystem.isSubBattlePhase() === 'normal') $gameTemp.clearRoute();
-		}
-	};
+	const _srpg_showPath_srpgCancelActorMove = Scene_Map.prototype.srpgCancelActorMove;
+	Scene_Map.prototype.srpgCancelActorMove = function(){
+		_srpg_showPath_srpgCancelActorMove.call(this);
+		$gameTemp.clearRoute();
+    }
 
 	// restore the route when you cancel the actor command
 	var _selectPreviousActorCommand = Scene_Map.prototype.selectPreviousActorCommand;
@@ -160,9 +223,6 @@ Sprite_SrpgMovePath.prototype.constructor = Sprite_SrpgMovePath;
 //====================================================================
 // Sprite_SrpgMovePath
 //====================================================================
-// get the image specified in the parameters
-Sprite_SrpgMovePath._bitmap = ImageManager.loadSystem(_fileName);
-
 	Sprite_SrpgMovePath.prototype.initialize = function() {
 		Sprite.prototype.initialize.call(this);
 		this.anchor.x = 0.5;
@@ -213,7 +273,8 @@ Sprite_SrpgMovePath._bitmap = ImageManager.loadSystem(_fileName);
 	};
 
 	Sprite_SrpgMovePath.prototype.setDirection = function(d2, d1) {
-		this.bitmap = Sprite_SrpgMovePath._bitmap;
+		//this.bitmap = Sprite_SrpgMovePath._bitmap;
+		this.bitmap = ImageManager.loadSystem(_fileName);
 		var w = this.bitmap.width / 5;
 		var h = this.bitmap.height / 4;
 

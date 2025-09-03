@@ -9,14 +9,30 @@
  * @target MZ
  * @plugindesc SRPG extension for movement and positioning skills, edited by OhisamaCraft.
  * @author Dr. Q
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
+ * 
+ * @param cellTargetUnavailableRegion
+ * @desc set regions that cannot be selected by cell target. If set to 0, no regions will be specified.
+ * @type number
+ * @min 0
+ * @default 255
  *
  * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
  * Script calls that can be put in damage formulas or lunatic notetags
  * to make skills that push, pull, move, and teleport.
  *
  * In addition, skills with the <cellTarget> tag can target unoccupied passable
  * cells for teleportation, or, with some creative events and other plugins,
  * things like summoning skills, terrain modifications, etc.
+ * 
+ * Note: In RPG Maker, ceiling tiles can be traversed even if they are set 
+ * as impassable. As a result, they can be targeted with <cellTarget> skills. 
+ * To prevent this, set ceiling tiles as non-passable tiles (terrain tag 7) or 
+ * specify them in the cellTargetUnavailableRegion.
  *
  * By default, these skills can target any cell the user can move through,
  * based on their srpgThroughTag settings and the terrain tag, but you can
@@ -78,6 +94,125 @@
  * a.forward(5) + a.atk - b.def
  * This will move the user up to 5 spaces forward. If they hit an obstacle (proably the target) before moving all
  * five spaces, they deal an additional 1 damage per remaining space.
+ * 
+ * 
+ * Unit Event Activation
+ * Default Behavior:
+ * Unit events are typically executed when the acting unit steps on the event.
+ * New Feature (Ver.1.23Q):
+ * Unit events can now trigger for events moved using specific movement scripts. 
+ * If a target event is moved onto a unit event (e.g., traps), the unit event will also execute.
+ * This feature enables scenarios such as pushing an opponent into a trap to trigger its effects.
+ * How to Set Up:
+ * Check the "For Trap" event example in the sample game's 'for Summon' map for a detailed implementation.
+ * 
+ * Movement Scripts That Trigger Unit Events:
+ * a.push, a.pull, a.pushRight, a.pushLeft
+ * a.pushAoE, a.pullAoE, a.pushRightAoE, a.pushLeftAoE, a.swap
+ * 
+ */
+
+/*:ja
+ * @target MZ
+ * @plugindesc SRPGで使用できる移動や位置替えスキルを使用可能にします（おひさまクラフトによる改変）
+ * @author Dr. Q
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
+ * 
+ * @param cellTargetUnavailableRegion
+ * @desc cellTargetで選択できないRegionを設定します。天井タイル部分などに利用できます。0 の場合は設定しません。
+ * @type number
+ * @min 0
+ * @default 255
+ *
+ * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
+ * ダメージ計算式やメモタグを使用することでプッシュ、プル、移動、テレポート効果を持つスキルを
+ * 作成することができます。
+ *
+ * 加えて、<cellTarget>タグを持つスキルは通行可能で占有されていないマスをテレポート先に
+ * することができます。イベントの工夫や他のプラグインとの組み合わせにより、召喚スキルや
+ * 地形変更スキルも作成することができるでしょう。
+ *
+ * デフォルトでは、これらのスキルはsrpgThroughTag設定および地形タグに基づき使用者が移動可能な
+ * マスを対象にすることができますが、<srpgTargetTag:X>をスキルやアイテムに設定することで使用者
+ * 以外のキャラクターを召喚する、あるいは移動させるスキルのような、独自の設定にすることができます。
+ * 
+ * 注意：RPGツクールの仕様として、天井タイルは通行不可設定になっていても実際には通行できます。
+ * そのため、そのままでは<cellTarget>スキルで選択できてしまいます。
+ * これを防ぐためには、天井部分を射程が通らないタイル（地形タグ7）にするか、
+ * cellTargetUnavailableRegionで指定したregionにしておく必要があります。
+ * 
+ * アクター、職業、敵キャラ、武器、防具およびステート用新メモタグ：
+ * <srpgImmovable>を設定したユニットはプッシュ、プル、位置交換されなくなります。
+ * 前進、後退、テレポートといった自発的な移動は妨げません（移動不可能性はユニットbには適用されますが、
+ * ユニットaには無視されます）。
+ *
+ * スキル/アイテム用新メモタグ:
+ * <cellTarget>を設定したスキルは、マップ上の占有されていないマスを対象にすることができます
+ * （通常は不可）。
+ *
+ * <anyTarget>を設定したスキルは敵味方両方を対象にすることができます。
+ * 位置変更スキルやAoEに便利ですが、AIユニットを混乱させるかもしれません。
+ *
+ *
+ * 情報スクリプト呼び出し:
+ * a.event()はSRPG戦闘中のバトラーに関連付けられたイベントを返します。
+ * a.srpgImmovable()はバトラーが移動不可の場合にtrueを返します。
+ *
+ * 便利なスクリプト呼び出し:
+ * a.focus()はaを中心にカーソル（およびカメラ）の焦点を合わせます。
+ * a.face(b)はaをbの方に向かせます。
+ * a.faceCursor()はaを現在のカーソル位置の方に向かせます。
+ * a.faceAoE()はaを現在のAoEの中心に向かせます。
+ *
+ * 移動スクリプト呼び出し:
+ * a.push(b, distance, type)はbをaから離すようにプッシュします。
+ * a.pull(b, distance, type)はbをaに向かって引き寄せるようにプルします。
+ * a.pushRight(b, distance, type)はaの右を通って（時計回り）bを動かします。
+ * a.pushLeft(b, distance, type)はaの左を通って（反時計回り）bを動かします。
+ * a.forward(distance, type)はaを向いている方向に向かって動かします。
+ * a.back(distance, type)はaを向いている方向とは反対に動かします。
+ * a.pushAoE(b, distance, type)はbをAoEの中心から離れるようにプッシュします（SRPG_AoE.jsが必要）。
+ * a.pullAoE(b, distance, type)はbをAoEの中心に向かって引き寄せるようにプルします（SRPG_AoE.jsが必要）。
+ * a.pushRightAoE(b, distance, type)はbをAoEの中心の時計回りに動かします。
+ * a.pushLeftAoE(b, distance, type)はbをAoEの中心の反時計回りに動かします。
+ * a.approach(b, type)aをbに最も近い開けた空間に動かします（直線状効果に最適）。
+ *
+ * typeには「normal」、「jump」あるいは「instant」が設定でき、指定しなかった場合は「normal」がデフォルトです。
+ * 壁や他のイベントによって移動が妨げられた場合、これらの関数は残りの距離を返します。
+ *
+ * 直接位置設定スクリプト呼び出し:
+ * a.swap(b)aとbの位置を入れ替えます。
+ * a.teleport(type)そのマスが空いていれば、aをカーソル位置に移動させます（<cellTarget>と合わせて使うのに最適）。
+ * a.teleportAoE(type)そのマスが空いていれば、aをAoEの中心に移動させます（SRPG_AoE.jsが必要）。
+ 
+ * typeには「jump」あるいは「instant」が設定でき、指定しなかった場合は「instant」がデフォルトです。
+ * 位置交換やテレポートが失敗した（対象が移動不可、無効な移動先）場合、これらの関数はfalseを返します。
+ *
+ *
+ * ダメージ計算式例:
+ * a.push(b, 1); a.atk - b.def
+ * これは対象を1マス動かしてダメージを与えます。
+ *
+ * a.forward(5) + a.atk - b.def
+ * これは使用者を5マス前進させます。5マスすべて移動する前に障害物（恐らく対象）にぶつかった場合、
+ * 残りマスごとに1ダメージを与えます。
+ * 
+ * 
+ * ユニットイベントの起動
+ * 通常、ユニットイベントは行動中のユニットがその上に乗った時に実行されます。
+ * Ver.1.23Qから追加された機能では、対象を移動させるスクリプトを利用した場合、
+ * 対象のイベントが移動した先にイベントユニットがある場合にもイベントユニットが実行されるようになりました。
+ * これにより、相手を吹き飛ばしてイベントユニット（罠など）を踏ませる、といった演出が可能になります。
+ * 具体的な作り方はサンプルゲームの召喚用マップにある『ユニットイベント（トラップ）』を参照してください。
+ * 
+ * 対象のイベントに対してユニットイベントが実行されるコマンド
+ * a.push, a.pull, a.pushRight, a.pushLeft, 
+ * a.pushAoE, a.pullAoE, a.pushRightAoE, a.pushLeftAoE, a.swap
+ * 
  */
 
 (function(){
@@ -85,6 +220,7 @@
 	var _srpgPredictionWindowMode = Number(coreParameters['srpgPredictionWindowMode'] || 1);
 
 	var parameters = PluginManager.parameters('SRPG_PositionEffects_MZ');
+	var _srpgCellTargetUnavailableRegion = Number(parameters['cellTargetUnavailableRegion'] || 255);
 
 //====================================================================
 // Stop position effects from happening during prediction
@@ -153,6 +289,8 @@
 	};
 
 	// (utility function) checks if a position is within the current skill's range
+	// SRPG_AoEの定義に統合
+	/*
 	Game_System.prototype.positionInRange = function(x, y) {
 		var area = $gameTemp.moveList();
 		for (var i = 0; i < area.length; i++) {
@@ -160,6 +298,7 @@
 		}
 		return false;
 	};
+	*/
 
 	// (utility) find the direction to a fixed point, discounting obstacles
 	Game_Character.prototype.dirTo = function(x, y) {
@@ -190,21 +329,39 @@
 //====================================================================
 
 	// check if a position is within range and unoccupied
+	// modified by OhisamaCraft
 	Game_System.prototype.positionIsValidTarget = function(x, y) {
-		var user = this.EventToUnit($gameTemp.activeEvent().eventId())[1];
+		const activeEvent = $gameTemp.activeEvent();
+		if (!activeEvent) return false;
+		const user = this.EventToUnit(activeEvent.eventId())[1];
 		if (!user) return false;
-		var action = user.currentAction();
+		const action = user.currentAction();
 		if (!action) return false;
-		var tag = action.item().meta.srpgTargetTag;
-		if (tag === undefined || tag < 0) tag = user.srpgThroughTag();
-
 		if (!action.item().meta.cellTarget) return false;
-		if ($gameMap.terrainTag(x, y) > 0 && $gameMap.terrainTag(x, y) > tag) return false;
+		const region = $gameMap.regionId(x, y);
+		if (_srpgCellTargetUnavailableRegion > 0 &&
+			region === _srpgCellTargetUnavailableRegion) return false;
+		let tag = Number(action.item().meta.srpgTargetTag);
+		if (!(tag && tag > 0)) tag = user.srpgThroughTag();
+		if (!activeEvent.chackCellTargetMoveValid(x, y, tag)) return false;
 		return ($gameSystem.positionInRange(x, y) && $gameMap.positionIsOpen(x, y));
 	}
 
+	Game_CharacterBase.prototype.chackCellTargetMoveValid = function(x, y, tag) {
+		let flag = false;
+		if ($gameMap.isCellTargetLandOk(x, y)) flag = true;
+		for (let d = 2; d < 10; d += 2) {
+			if (this.srpgMoveCanPass(x, y, d, tag)) flag = true;
+		}
+		return flag;
+	}
+
+	Game_Map.prototype.isCellTargetLandOk = function(x, y) {
+		return this.checkPassage(x, y, 0x0f);
+	};
+
 	// allow selection of empty spaces
-	var _selection_triggerAction = Game_Player.prototype.triggerAction;
+	const _selection_triggerAction = Game_Player.prototype.triggerAction;
 	Game_Player.prototype.triggerAction = function() {
 		if ($gameSystem.isSRPGMode() &&(Input.isTriggered('ok') || TouchInput.isTriggered())) {
 			if ($gameSystem.isSubBattlePhase() === 'actor_target') {
@@ -238,6 +395,20 @@
 //====================================================================
 // SRPG-map-aware movement functions
 //====================================================================
+
+	const _SRPG_PositionEffects_Game_Character_initMembers = Game_Character.prototype.initMembers;
+	Game_Character.prototype.initMembers = function() {
+	    _SRPG_PositionEffects_Game_Character_initMembers.call(this);
+	    this._ForcedMovement = false;
+	};
+
+	Game_Character.prototype.isForcedMovement = function() {
+	    return this._ForcedMovement;
+	};
+
+	Game_Character.prototype.setForcedMovement = function(flag) {
+	    this._ForcedMovement = flag;
+	};
 
 	// try to move a character, stopping if it hits an obstacle, and returns the remaining distance
 	Game_Character.prototype.srpgTryMove = function(dir, distance, type) {
@@ -434,6 +605,7 @@
 		var targetEvent = target.event();
 		if (!userEvent || !targetEvent) return 0;
 		if (userEvent === targetEvent) return this.back(distance, type);
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(10-targetEvent.dirTo(userEvent.posX(), userEvent.posY()), distance, type);
 	};
 	// pull target in
@@ -443,6 +615,7 @@
 		var targetEvent = target.event();
 		if (!userEvent || !targetEvent) return 0;
 		if (userEvent === targetEvent) return this.forward(distance, type);
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(targetEvent.dirTo(userEvent.posX(), userEvent.posY()), distance, type);
 	};
 	// move target clockwise
@@ -454,6 +627,7 @@
 
 		var dir = targetEvent.dirTo(userEvent.posX(), userEvent.posY());
 		var clockwise = [0, 3, 6, 9, 2, 5, 8, 1, 4, 7];
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(clockwise[dir], distance, type);
 	};
 	// move target counter-clockwise
@@ -465,6 +639,7 @@
 
 		var dir = targetEvent.dirTo(userEvent.posX(), userEvent.posY());
 		var counterClockwise = [0, 7, 4, 1, 8, 5, 2, 9, 6, 3];
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(counterClockwise[dir], distance, type);
 	};
 
@@ -482,7 +657,10 @@
 		var userEvent = this.event();
 		var targetEvent = target.event();
 		if (!userEvent || !targetEvent) return false;
-		if (!$gameTemp.isPrediction()) userEvent.swap(targetEvent);
+		if (!$gameTemp.isPrediction()) {
+			userEvent.swap(targetEvent);
+			targetEvent.setForcedMovement(true);
+		}
 		return true;
 	};
 	// teleport to an empty cell
@@ -498,6 +676,7 @@
 		var targetEvent = target.event();
 		if (!targetEvent) return 0;
 		if (!$gameTemp.areaX || !$gameTemp.areaY) return 0;
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(10-targetEvent.dirTo($gameTemp.areaX(), $gameTemp.areaY()), distance, type);
 	};
 	// pull target in (to an AoE)
@@ -507,7 +686,7 @@
 		if (!targetEvent) return 0;
 		if (!$gameTemp.areaX || !$gameTemp.areaY ||
 		targetEvent.pos($gameTemp.areaX(), $gameTemp.areaY())) return 0;
-
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(targetEvent.dirTo($gameTemp.areaX(), $gameTemp.areaY()), distance, type);
 	};
 	// move target clockwise (around an AoE)
@@ -520,6 +699,7 @@
 
 		var dir = targetEvent.dirTo($gameTemp.areaX(), $gameTemp.areaY());
 		var clockwise = [0, 3, 6, 9, 2, 5, 8, 1, 4, 7];
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(clockwise[dir], distance, type);
 	};
 	// move target counter-clockwise (around an AoE)
@@ -532,6 +712,7 @@
 
 		var dir = targetEvent.dirTo($gameTemp.areaX(), $gameTemp.areaY());
 		var counterClockwise = [0, 7, 4, 1, 8, 5, 2, 9, 6, 3];
+		targetEvent.setForcedMovement(true);
 		return targetEvent.srpgTryMove(counterClockwise[dir], distance, type);
 	};
 	// teleport to an empty cell (at the center of an AoE)
