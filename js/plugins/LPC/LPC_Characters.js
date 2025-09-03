@@ -178,10 +178,10 @@ Sprite_Character.prototype.characterBlockY = function () {
 };
 
 const LPC_directionMap = {
-    0: 2,
-    1: 1,
-    2: 3,
-    3: 0
+    0: 2, // down
+    1: 1, // left
+    2: 3, // right
+    3: 0  // up
 };
 
 const LPC_Characters_Sprite_Character_characterPatternY = Sprite_Character.prototype.characterPatternY;
@@ -189,12 +189,23 @@ Sprite_Character.prototype.characterPatternY = function () {
     return LPC_directionMap[LPC_Characters_Sprite_Character_characterPatternY.call(this)];
 }
 
+function calcLPCCustomPatternWidthOrHeight(characterName) {
+    let cname = characterName;
+    cname = cname.substring(cname.lastIndexOf('/') + 1);
+    if (cname.includes('_')) {
+        const lastUnderscoreIndex = cname.lastIndexOf('_');
+        const value = cname.substring(lastUnderscoreIndex + 1);
+        return value;
+    }
+    return null;
+}
+
 const LPC_Characters_Sprite_Character_patternWidth = Sprite_Character.prototype.patternWidth;
 Sprite_Character.prototype.patternWidth = function () {
     if (this.paramType() === 'null') {
         return LPC_Characters_Sprite_Character_patternWidth.call(this);
     }
-    return params[this.paramType()].pw;
+    return calcLPCCustomPatternWidthOrHeight(this._character._characterName) ?? params[this.paramType()].pw;
 };
 
 const LPC_Characters_Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
@@ -202,12 +213,12 @@ Sprite_Character.prototype.patternHeight = function () {
     if (this.paramType() === 'null') {
         return LPC_Characters_Sprite_Character_patternHeight.call(this);
     }
-    return params[this.paramType()].ph;
+    return calcLPCCustomPatternWidthOrHeight(this._character._characterName) ?? params[this.paramType()].ph;
 };
 
 const LPC_Characters_Sprite_Character_prototype_updateCharacterFrame = Sprite_Character.prototype.updateCharacterFrame;
 Sprite_Character.prototype.updateCharacterFrame = function() {
-    if ($gameSystem.isSRPGMode() && !this.isMotionRequested()) {
+    if ($gameSystem.isSRPGMode() && !this.isLPCMotionRequested()) {
         LPC_Characters_Sprite_Character_prototype_updateCharacterFrame.call(this);
     } else {
         const pw = this.patternWidth();
@@ -227,12 +238,27 @@ Sprite_Character.prototype.updateCharacterFrame = function() {
     }
 };
 
+function calcLPCCustomPatternCharOffset(characterName, axis, dir) {
+    let cname = characterName;
+    cname = cname.substring(cname.lastIndexOf('/') + 1);
+    if (cname.includes('_')) {
+        const lastUnderscoreIndex = cname.lastIndexOf('_');
+        let value = cname.substring(lastUnderscoreIndex + 1);
+        value >>= 4; // divides by 16
+        value *= 3;
+        return axis === 'x' ? 0 : dir === 8 ? -(value >> 1) : -value;
+    }
+    return null;
+}
+
 Sprite_Character.prototype.characterOffsetX = function() {
-    return params[this.paramType()].dxo;
+    return calcLPCCustomPatternCharOffset(this._character._characterName, 'x', this._character.direction()) ??
+        params[this.paramType()].dxo;
 };
 
 Sprite_Character.prototype.characterOffsetY = function() {
-    return params[this.paramType()].dyo;
+    return calcLPCCustomPatternCharOffset(this._character._characterName, 'y', this._character.direction()) ??
+        params[this.paramType()].dyo;
 };
 
 Sprite_Character.prototype.anchorY = function() {
