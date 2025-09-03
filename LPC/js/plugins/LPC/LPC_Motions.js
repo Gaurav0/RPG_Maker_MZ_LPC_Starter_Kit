@@ -26,7 +26,7 @@ Sprite_Character.LPC_MOTIONS = {
     damage: { index: 4, loop: false },
     evade: { index: 5, loop: false },
     thrust: { index: 6, loop: false, name: 'thrust', frames: 8 },
-    swing: { index: 7, loop: false, name: 'slash', frames: 6 },
+    swing: { index: 7, loop: false, name: 'custom/slash_128', frames: 6 },
     missile: { index: 8, loop: false, name: 'shoot', frames: 13 },
     skill: { index: 9, loop: false },
     spell: { index: 10, loop: false, name: 'spellcast', frames: 7 },
