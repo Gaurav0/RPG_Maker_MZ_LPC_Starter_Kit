@@ -98,6 +98,7 @@ Sprite_Character.prototype.startLPCMotion = function(motionType) {
         this.setupLPCMotionBitmap(this._character.characterName(), motionType);
         this._lpcMotionCount = 0;
         this._pattern = 0;
+        this._character.setPriorityType(2);
     }
 };
 
@@ -136,6 +137,7 @@ Sprite_Character.prototype.updateLPCMotion = function() {
 };
 
 Sprite_Character.prototype.clearLPCMotion = function() {
+    this._character.setPriorityType(1);
     this._lpcMotion = null;
     this._lpcMotionBitmap = null;
     this._character._characterName = this._originalCharacterName;
