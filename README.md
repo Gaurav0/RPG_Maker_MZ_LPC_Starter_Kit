@@ -6,7 +6,7 @@ The most widely used 2D RPG game engine at the moment is RPG Maker MZ. This proj
 
 ## Under Construction
 
-Play it now in your browser at https://gaurav0.github.io/RPG_Maker_MZ_LPC_Starter_Kit
+Play it now in your browser at https://liberatedpixelcup.github.io/RPG_Maker_MZ_LPC_Starter_Kit
 
 Contributions welcome. All non-third party code in this repository is under the MIT license subject to RPG Maker MZ terms of use. RPG Maker Core scripts are commercially licensed without royalty and with source code available, all other code in this repository is open source under various licenses. There is no GPL/copyleft code.
 
