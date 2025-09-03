@@ -207,7 +207,7 @@ Sprite_Character.prototype.patternHeight = function () {
 
 const LPC_Characters_Sprite_Character_prototype_updateCharacterFrame = Sprite_Character.prototype.updateCharacterFrame;
 Sprite_Character.prototype.updateCharacterFrame = function() {
-    if ($gameSystem.isSRPGMode() && !this.isMotionRequested()) {
+    if ($gameSystem.isSRPGMode() && !this.isLPCMotionRequested()) {
         LPC_Characters_Sprite_Character_prototype_updateCharacterFrame.call(this);
     } else {
         const pw = this.patternWidth();

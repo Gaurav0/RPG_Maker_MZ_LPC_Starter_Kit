@@ -16,7 +16,7 @@
 // Battler Motions for characters
 // This is largely based on battler motions for actors
 // from rmmz_sprites.js
-Sprite_Character.MOTIONS = {
+Sprite_Character.LPC_MOTIONS = {
     walk: { index: 0, loop: true, name: 'walk', frames: 9 },
     wait: { index: 1, loop: true, name: 'idle', frames: 2 },
     chant: { index: 2, loop: true },
@@ -41,110 +41,122 @@ Sprite_Character.MOTIONS = {
 const LPC_Motions_Sprite_Character_initialize = Sprite_Character.prototype.initialize;
 Sprite_Character.prototype.initialize = function() {
     LPC_Motions_Sprite_Character_initialize.apply(this, arguments);
-    this._motion = null;
-    this._motionType = null;
-    this._motionBitmap = null;
-    this._motionRefresh = false;
+    this._lpcMotion = null;
+    this._lpcMotionType = null;
+    this._lpcMotionBitmap = null;
+    this._lpcMotionRefresh = false;
 };
 
-Sprite_Character.prototype.playMotion = function(motionType) {
-    this.requestMotion(motionType);
-    const motion = Sprite_Character.MOTIONS[motionType];
+Sprite_Character.prototype.playLPCMotion = function(motionType) {
+    this.requestLPCMotion(motionType);
+    const motion = Sprite_Character.LPC_MOTIONS[motionType];
     if (motion.name) {
-        this.startMotion(motionType);
+        this.startLPCMotion(motionType);
     }
 };
 
-Sprite_Character.prototype.isMotionRequested = function() {
-    return this._motionType !== null;
+Sprite_Character.prototype.isLPCMotionRequested = function() {
+    return this._lpcMotionType !== null;
 };
 
-Sprite_Character.prototype.setupMotionBitmap = function(characterName, motionType) {
-    const motion = Sprite_Character.MOTIONS[motionType];
+function generateLPCMotionFilename(characterName, motionName) {
+    let filename;
+    const lastSlashIndex = characterName.lastIndexOf('/');
+    if (motionName.includes('/')) {
+        const secondLastSlashIndex = characterName.lastIndexOf('/', lastSlashIndex - 1);
+        filename = characterName.substring(0, secondLastSlashIndex) + '/' + motionName;
+    } else {
+        filename = characterName.substring(0, lastSlashIndex) + '/' + motionName;
+    }
+    return filename;
+}
+
+Sprite_Character.prototype.setupLPCMotionBitmap = function(characterName, motionType) {
+    const motion = Sprite_Character.LPC_MOTIONS[motionType];
     const motionName = motion.name;
     if (motionName) {
         this._originalCharacterName = this._character._characterName;
         this._originalBitmap = this._bitmap;
-        const filename = characterName.substring(0, characterName.lastIndexOf('/')) + '/' + motionName;
+        let filename = generateLPCMotionFilename(characterName, motionName); 
         const bitmap = ImageManager.loadCharacter(filename);
-        this._motionBitmap = bitmap;
+        this._lpcMotionBitmap = bitmap;
         this._character._characterName = filename;
-        this._bitmap = this._motionBitmap;
+        this._bitmap = this._lpcMotionBitmap;
     }
 };
 
-Sprite_Character.prototype.requestMotion = function(motionType) {
-    this._motionType = motionType;
+Sprite_Character.prototype.requestLPCMotion = function(motionType) {
+    this._lpcMotionType = motionType;
 };
 
-Sprite_Character.prototype.startMotion = function(motionType) {
-    const newMotion = Sprite_Character.MOTIONS[motionType];
-    if (this._motion !== newMotion) {
-        this._motion = newMotion;
-        this.setupMotionBitmap(this._character.characterName(), motionType);
-        this._motionCount = 0;
+Sprite_Character.prototype.startLPCMotion = function(motionType) {
+    const newMotion = Sprite_Character.LPC_MOTIONS[motionType];
+    if (this._lpcMotion !== newMotion) {
+        this._lpcMotion = newMotion;
+        this.setupLPCMotionBitmap(this._character.characterName(), motionType);
+        this._lpcMotionCount = 0;
         this._pattern = 0;
     }
 };
 
-Sprite_Character.prototype.updateMotionCount = function() {
-    if (this._motion && ++this._motionCount >= this.motionSpeed()) {
-        if (++this._pattern === this._motion.frames) {
+Sprite_Character.prototype.updateLPCMotionCount = function() {
+    if (this._lpcMotion && ++this._lpcMotionCount >= this.lpcMotionSpeed()) {
+        if (++this._pattern === this._lpcMotion.frames) {
             this._pattern = 0;
-            if (!this._motion.loop) {
-                this.requestMotionRefresh();
+            if (!this._lpcMotion.loop) {
+                this.requestLPCMotionRefresh();
             }
         }
-        this._motionCount = 0;
+        this._lpcMotionCount = 0;
     }
 };
 
 const LPC_Motions_Sprite_Character_prototype_characterPatternX = Sprite_Character.prototype.characterPatternX;
 Sprite_Character.prototype.characterPatternX = function() {
-    if (this._motion) {
+    if (this._lpcMotion) {
         return this._pattern;
     }
     return LPC_Motions_Sprite_Character_prototype_characterPatternX.call(this);
 };
 
-Sprite_Character.prototype.motionSpeed = function() {
+Sprite_Character.prototype.lpcMotionSpeed = function() {
     return 12;
 };
 
-Sprite_Character.prototype.updateMotion = function() {
-    if (this.isMotionRefreshRequested()) {
-        this.refreshMotion();
-        this.clearMotion();
-        this._motionRefresh = false;
+Sprite_Character.prototype.updateLPCMotion = function() {
+    if (this.isLPCMotionRefreshRequested()) {
+        this.refreshLPCMotion();
+        this.clearLPCMotion();
+        this._lpcMotionRefresh = false;
     } else {
-        this.updateMotionCount();
+        this.updateLPCMotionCount();
     }
 };
 
-Sprite_Character.prototype.clearMotion = function() {
-    this._motion = null;
-    this._motionBitmap = null;
+Sprite_Character.prototype.clearLPCMotion = function() {
+    this._lpcMotion = null;
+    this._lpcMotionBitmap = null;
     this._character._characterName = this._originalCharacterName;
     this._bitmap = this._originalBitmap;
 };
 
-Sprite_Character.prototype.refreshMotion = function() {
-    this._motionCount = 0;
+Sprite_Character.prototype.refreshLPCMotion = function() {
+    this._lpcMotionCount = 0;
     this._pattern = 0;
 };
 
-Sprite_Character.prototype.isMotionRefreshRequested = function() {
-    return this._motionRefresh;
+Sprite_Character.prototype.isLPCMotionRefreshRequested = function() {
+    return this._lpcMotionRefresh;
 };
 
-Sprite_Character.prototype.requestMotionRefresh = function() {
-    this._motionRefresh = true;
+Sprite_Character.prototype.requestLPCMotionRefresh = function() {
+    this._lpcMotionRefresh = true;
 };
 
 const LPC_Motions_Sprite_Character_prototype_updateCharacterFrame = Sprite_Character.prototype.updateCharacterFrame;
 Sprite_Character.prototype.updateCharacterFrame = function() {
-    if ($gameSystem.isSRPGMode() && this.isMotionRequested()) {
-        this.updateMotion();
+    if ($gameSystem.isSRPGMode() && this.isLPCMotionRequested()) {
+        this.updateLPCMotion();
     }
     LPC_Motions_Sprite_Character_prototype_updateCharacterFrame.call(this);
 };
@@ -160,16 +172,16 @@ Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
             gameActor = $gameActors.actor(user.actorId());
             char = gameActor.character();
             sprite = char._sprite;
-            sprite.playMotion(user.motionType());
+            sprite.playLPCMotion(user.motionType());
         } else if (user.isEnemy()) {
             gameEnemy = $gameMap.event(user._eventId);
             char = gameEnemy.unit();
             sprite = gameEnemy._sprite;
-            sprite.playMotion("attack");
+            sprite.playLPCMotion("attack");
         }
-        if (sprite._motion) {
+        if (sprite._lpcMotion) {
             user.currentAction().item().meta.animationDelay =
-                sprite.motionSpeed() * sprite._motion.frames;
+                sprite.lpcMotionSpeed() * sprite._lpcMotion.frames;
         }
     }
 
@@ -255,3 +267,4 @@ Game_Event.prototype.unit = function() {
     }
     return null;
 };
+
