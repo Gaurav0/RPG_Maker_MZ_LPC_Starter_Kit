@@ -349,7 +349,7 @@
   "startY": 13,
   "switches": [
     "",
-    "wolf alive",
+    "",
     "",
     "",
     "",
@@ -641,7 +641,7 @@
   },
   "variables": [
     "",
-    "",
+    "Num Wolves Killed",
     "",
     "",
     "",
@@ -688,7 +688,7 @@
     "Active Event Id",
     "Target Event Id",
     "distance from Opponent",
-    "",
+    "Troop Id",
     "",
     "",
     "",
@@ -762,7 +762,7 @@
     "",
     ""
   ],
-  "versionId": 96867530,
+  "versionId": 32614403,
   "victoryMe": {
     "name": "",
     "pan": 0,
