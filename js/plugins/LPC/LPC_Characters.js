@@ -265,5 +265,12 @@ Sprite_Character.prototype.anchorY = function() {
     return params[this.paramType()].ay;
 }
 
+const LPC_Characters_Scene_Map_prototype_srpgInvokeEnemyMove = Scene_Map.prototype.srpgInvokeEnemyMove;
+Scene_Map.prototype.srpgInvokeEnemyMove = function() {
+    const event = $gameTemp.activeEvent();
+    event.setWalkAnime(true);
+    LPC_Characters_Scene_Map_prototype_srpgInvokeEnemyMove.call(this);
+};
+
 // Disable Effekseeker Animations
 Game_Temp.prototype.requestAnimation = function() {};

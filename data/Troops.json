@@ -37,13 +37,13 @@
       {
         "enemyId": 1,
         "x": 240,
-        "y": 444,
+        "y": 436,
         "hidden": false
       },
       {
         "enemyId": 1,
         "x": 576,
-        "y": 444,
+        "y": 436,
         "hidden": false
       }
     ],
@@ -77,8 +77,27 @@
   },
   {
     "id": 3,
-    "members": [],
-    "name": "",
+    "members": [
+      {
+        "enemyId": 1,
+        "x": 168,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 408,
+        "y": 436,
+        "hidden": false
+      },
+      {
+        "enemyId": 1,
+        "x": 648,
+        "y": 436,
+        "hidden": false
+      }
+    ],
+    "name": "wolf*3",
     "pages": [
       {
         "conditions": {

@@ -9,6 +9,8 @@
  * @target MZ
  * @plugindesc SRPG cursor, movement, and selection upgrades, edited by OhisamaCraft.
  * @author Dr. Q
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
  *
  * @param Cursor-Style Movement
  * @desc Make the cursor move like a cursor
@@ -92,6 +94,9 @@
  *
  *
  * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
  * An assortment of changes and settings to make combat
  * quicker and cleaner
  * 
@@ -120,6 +125,119 @@
  *
  */
 
+/*:ja
+ * @target MZ
+ * @plugindesc SRPG用のカーソル、移動および選択を改善します（おひさまクラフトによる改変）。
+ * @author Dr. Q
+ * @base SRPG_core_MZ
+ * @orderAfter SRPG_core_MZ
+ *
+ * @param Cursor-Style Movement
+ * @desc カーソル移動をカーソル形式にします。
+ * @type boolean
+ * @default true
+ * 
+ * @param Cursor Delay
+ * @desc カーソル移動のフレームディレイ
+ * @parent Cursor-Style Movement
+ * @type number
+ * @default 8
+ *
+ * @param Cursor Speed
+ * @desc カーソル移動速度。イベントの「移動速度」と同じ形式です。
+ * @parent Cursor-Style Movement
+ * @type number
+ * @default 6
+ *
+ *
+ * @param Animate Cursor
+ * @desc カーソルが自動的にアニメーションするようになります。
+ * @type boolean
+ * @default true
+ *
+ * @param Animate Delay
+ * @desc カーソルフレーム間のフレームディレイ
+ * @parent Animate Cursor
+ * @type number
+ * @default 15
+ *
+ *
+ * @param Start On Next Actor
+ * @desc 行動完了後、自動的に次のアクターまでカーソルが移動します。
+ * @type boolean
+ * @default true
+ *
+ *
+ * @param Switch Actor While Moving
+ * @desc 移動している間、そのアクターを動かす代わりに別のアクターをカーソル選択します。
+ * @type boolean
+ * @default true
+ *
+ *
+ * @param Quick Attack
+ * @desc 移動している間、攻撃対象にするために敵をカーソル選択します。
+ * Requires SRPG_RangeControl.js
+ * @type boolean
+ * @default true
+ *
+ *
+ * @param Quick Target Switch
+ * @desc ターゲット切り替えにPage Up / Page Downを使用します。
+ * @type boolean
+ * @default true
+ * 
+ * @param Quick Switch From Preview
+ * @desc 戦闘予測画面にてターゲット切り替えを使用します。AoEやマップのマスを対象にするスキルには適用されません。
+ * @parent Quick Target Switch
+ * @type boolean
+ * @default false
+ *
+ *
+ * @param Auto Target
+ * @desc カーソル初期位置が対象になりうるユニットになります（いれば）。
+ * @type boolean
+ * @default true
+ *
+ * @param Auto Select
+ * @desc 最初の有効な対象を自動的に選択します（Auto Targetが有効である必要があります）。AoEやマップのマスを対象にするスキルには適用されません。
+ * @parent Auto Target
+ * @type select
+ * @option 常にしない
+ * @value 0
+ * @option 自分対象のみする
+ * @value 1
+ * @option 常にする
+ * @value 2
+ * @default 0
+ *
+ *
+ * @help
+ * copyright 2020 SRPG Team. all rights reserved.
+ * Released under the MIT license.
+ * ============================================================================
+ * 戦闘をより早くスムーズにするための改善
+ * 
+ * オプション:
+ *
+ * - Cursor-Style Movement: カーソルのマスからマスへの移動が素早く、
+ *   SE付きになります。Cursor Delayにて移動後の停滞時間を制御できます。
+ *   Cursor Speedは移動速度を決定します。
+ *   これはSRPG_etcModのカーソル形式移動と競合する可能性があります。
+ *
+ * - Animate Cursor: マップ上のカーソルが、移動していなくてもアニメーション
+ *   するようになります。Animate Delayはフレームごとの滞留時間を制御します。
+ *
+ * - Quick Target: アクターフェイズにて、page upやpage downを押下することで
+ *   操作可能ユニットが切り替わるようになります。対象選択時は、射程内の有効な
+ *   対象の切り替えが可能です。
+ *   Auto Quick Targetは最初の有効な選択にカーソルが移動します。
+ *   Auto Quick Actorは行動終了時、次のアクターにカーソルが移動します。
+ *
+ * 自動適用:
+ * - 対象選択や移動をキャンセルすると、カーソルがアクターの位置に戻ります。
+ *
+ */
+
 (function(){
 	// parameters
 	var parameters = PluginManager.parameters('SRPG_UX_Cursor_MZ');
@@ -141,17 +259,20 @@
 	var autoTarget = !!eval(parameters['Auto Target']);
 	var autoSelect = Number(parameters['Auto Select']);
 
+	var UX_Windows_parameters = PluginManager.parameters('SRPG_UX_Windows_MZ');
+	var _srpgAutoOpenActorCommandStatusWindow = !!eval(UX_Windows_parameters['srpgAutoOpenActorCommandStatusWindow']);
+
 //====================================================================
 // cursor-style movement
 //====================================================================
 
 	// Override cursor speed
-	var _realMoveSpeed = Game_Player.prototype.realMoveSpeed;
+	const _SRPG_UXCursor_realMoveSpeed = Game_Player.prototype.realMoveSpeed;
 	Game_Player.prototype.realMoveSpeed = function() {
 		if ($gameSystem.isSRPGMode() && cursorStyle) {
 			return cursorSpeed;
 		} else {
-			return _realMoveSpeed.call(this);
+			return _SRPG_UXCursor_realMoveSpeed.call(this);
 		}
 	};
 
@@ -166,9 +287,9 @@
 	};
 
 	// override movement to act more like a cursor
-	var _moveByInput = Game_Player.prototype.moveByInput;
+	const _SRPG_UXCursor_moveByInput = Game_Player.prototype.moveByInput;
 	Game_Player.prototype.moveByInput = function() {
-		if ($gameSystem.isSRPGMode() && cursorStyle && !this.isMoving()) {
+		if ($gameSystem.isSRPGMode() && cursorStyle && !this.isMoving() && !$gameMessage.isBusy()) {
 			// automatic movement
 			if ($gameTemp.isAutoMoveDestinationValid()) {
 				var x = $gameTemp.autoMoveDestinationX();
@@ -204,7 +325,7 @@
 				return;
 			}
 		}
-		_moveByInput.call(this);
+		_SRPG_UXCursor_moveByInput.call(this);
 	};
 
 //====================================================================
@@ -212,63 +333,80 @@
 //====================================================================
 
 	// cursor animates even while static
-	_hasStepAnime = Game_Player.prototype.hasStepAnime;
+	const _SRPG_UXCursor_hasStepAnime = Game_Player.prototype.hasStepAnime;
 	Game_Player.prototype.hasStepAnime = function() {
 		if ($gameSystem.isSRPGMode() && animateCursor) return true;
-		return _hasStepAnime.call(this);
+		return _SRPG_UXCursor_hasStepAnime.call(this);
 	};
 
 	// custom cursor animation rate
-	_animationWait = Game_Player.prototype.animationWait;
+	const _SRPG_UXCursor_animationWait = Game_Player.prototype.animationWait;
 	Game_Player.prototype.animationWait = function() {
 		if ($gameSystem.isSRPGMode() && animateCursor) return animateDelay;
-		return _animationWait.call(this);
+		return _SRPG_UXCursor_animationWait.call(this);
 	};
 
 //====================================================================
 // cursor automatically moves as needed
 //====================================================================
-
-	// cancel movement or target, plus quick targeting
-	var _updateCallMenu = Scene_Map.prototype.updateCallMenu;
-	Scene_Map.prototype.updateCallMenu = function() {
-		if ($gameSystem.isSRPGMode() && !$gameSystem.srpgWaitMoving()) {
-			// return cursor when deselecting
-			if (($gameSystem.isSubBattlePhase() === 'actor_move' ||
+	Scene_Map.prototype.isReturnCursorDeselecting = function() {
+		return (($gameSystem.isSubBattlePhase() === 'actor_move' ||
 				$gameSystem.isSubBattlePhase() === 'actor_target' ||
 				$gameSystem.isSubBattlePhase() === 'actor_targetArea') &&
-				this.isMenuCalled()) {
-				var event = $gameTemp.activeEvent();
-				$gamePlayer.slideTo(event.posX(), event.posY());
-			}
-			// page through valid selections
-			if (Input.isTriggered('pagedown')) {
-				if (moveSwitch && $gameSystem.isSubBattlePhase() === 'actor_move') {
-					SoundManager.playCursor();
-					$gameSystem.getNextRActor();
-				}
-				if (quickTarget && ($gameSystem.isSubBattlePhase() === 'actor_target' || $gameSystem.isSubBattlePhase() === 'actor_targetArea')) {
-					SoundManager.playCursor();
-					$gameSystem.getNextRTarget();
-				}
-			} else if (Input.isTriggered('pageup')) {
-				if (moveSwitch && $gameSystem.isSubBattlePhase() === 'actor_move') {
-					SoundManager.playCursor();
-					$gameSystem.getNextLActor();
-				}
-				if (quickTarget && ($gameSystem.isSubBattlePhase() === 'actor_target' || $gameSystem.isSubBattlePhase() === 'actor_targetArea')) {
-					SoundManager.playCursor();
-					$gameSystem.getNextLTarget();
-				}
-			}
-		}
-		_updateCallMenu.call(this);
+				this.isMenuCalled());
 	};
 
+	// LRボタンが押された時の処理
+	const _srpg_UXCursor_triggerdLRInUpdateCallMenu = Scene_Map.prototype.triggerdLRInUpdateCallMenu;
+    Scene_Map.prototype.triggerdLRInUpdateCallMenu = function(){
+		// page through valid selections
+		if (Input.isTriggered('pagedown')) {
+			if (moveSwitch && $gameSystem.isSubBattlePhase() === 'actor_move') {
+				$gameSystem.getNextRActor();
+				return true;
+			}
+			if (quickTarget && ($gameSystem.isSubBattlePhase() === 'actor_target' || $gameSystem.isSubBattlePhase() === 'actor_targetArea')) {
+				$gameSystem.getNextRTarget();
+				return true;
+			}
+		} else if (Input.isTriggered('pageup')) {
+			if (moveSwitch && $gameSystem.isSubBattlePhase() === 'actor_move') {
+				$gameSystem.getNextLActor();
+				return true;
+			}
+			if (quickTarget && ($gameSystem.isSubBattlePhase() === 'actor_target' || $gameSystem.isSubBattlePhase() === 'actor_targetArea')) {
+				$gameSystem.getNextLTarget();
+				return true;
+			}
+		}
+		return _srpg_UXCursor_triggerdLRInUpdateCallMenu.call(this);
+    }
+
+    // 各種キャンセルの処理
+	const _srpg_UXCursor_triggerdCancelInUpdateCallMenu = Scene_Map.prototype.triggerdCancelInUpdateCallMenu;
+    Scene_Map.prototype.triggerdCancelInUpdateCallMenu = function(){
+		// return cursor when deselecting
+		if (this.isReturnCursorDeselecting()) {
+			var event = $gameTemp.activeEvent();
+			$gamePlayer.slideTo(event.posX(), event.posY());
+		}
+		return _srpg_UXCursor_triggerdCancelInUpdateCallMenu.call(this);
+    }
+
+	// アクターの移動処理キャンセル
+	const srpgUXWindows_Scene_Map_srpgCancelActorMove = Scene_Map.prototype.srpgCancelActorMove;
+    Scene_Map.prototype.srpgCancelActorMove = function(){
+		const battlerArray = $gameSystem.EventToUnit($gameTemp.activeEvent().eventId());
+		srpgUXWindows_Scene_Map_srpgCancelActorMove.call(this);
+		if (_srpgAutoOpenActorCommandStatusWindow) {
+			$gameSystem.setSrpgActorCommandStatusWindowNeedRefresh(battlerArray, true);
+		}
+    }
+
 	// If autoselect applies, cancelling the battle preview skips back to the command window
-	var _selectPreviousSrpgBattleStart = Scene_Map.prototype.selectPreviousSrpgBattleStart;
+	const _SRPG_UXCursor_selectPreviousSrpgBattleStart = Scene_Map.prototype.selectPreviousSrpgBattleStart;
 	Scene_Map.prototype.selectPreviousSrpgBattleStart = function() {
-		_selectPreviousSrpgBattleStart.call(this);
+		_SRPG_UXCursor_selectPreviousSrpgBattleStart.call(this);
 		if ($gameTemp.canAutoSelect()) {
 			var event = $gameTemp.activeEvent();
 			var battlerArray = $gameSystem.EventToUnit(event.eventId());
@@ -302,6 +440,8 @@
 	};
 
 	// (utility function) checks if an event is within the current skill's range
+	// SRPG_AoEの定義に統合
+	/*
 	Game_System.prototype.positionInRange = function(x, y) {
 		var range = $gameTemp.rangeList();
 		for (var i = 0; i < range.length; i++) {
@@ -309,6 +449,7 @@
 		}
 		return false;
 	};
+	*/
 
 	// (utility function) checks if an event is a valid target for the current skill
 	Game_System.prototype.eventIsValidTarget = function(event) {
@@ -326,6 +467,7 @@
 
 	// find the next valid target
 	Game_System.prototype.getNextRTarget = function() {
+		SoundManager.playCursor();
 		var id = 0;
 		var events = $gameMap.eventsXyNt($gamePlayer.x, $gamePlayer.y);
 		if (events && events.length > 0) {
@@ -337,6 +479,7 @@
 
 	// find the previous valid target
 	Game_System.prototype.getNextLTarget = function() {
+		SoundManager.playCursor();
 		var id = 0;
 		var events = $gameMap.eventsXyNt($gamePlayer.x, $gamePlayer.y);
 		if (events && events.length > 0) {
@@ -348,6 +491,8 @@
 
 	// override the actor selecting functions with a different formula
 	Game_System.prototype.getNextRActor = function() {
+		SoundManager.playCursor();
+		$gameTemp.clearDestination();
 		var id = 0;
 		var events = $gameMap.eventsXyNt($gamePlayer.x, $gamePlayer.y);
 		if (events && events.length > 0) {
@@ -357,6 +502,8 @@
 		return (id != newId);
 	};
 	Game_System.prototype.getNextLActor = function() {
+		SoundManager.playCursor();
+		$gameTemp.clearDestination();
 		var id = 0;
 		var events = $gameMap.eventsXyNt($gamePlayer.x, $gamePlayer.y);
 		if (events && events.length > 0) {
@@ -414,9 +561,9 @@
 	};
 
 	// add next/previous target commands to the attack preview
-	var _createSrpgBattleWindow = Scene_Map.prototype.createSrpgBattleWindow;
+	const _SRPG_UXCursor_createSrpgBattleWindow = Scene_Map.prototype.createSrpgBattleWindow;
 	Scene_Map.prototype.createSrpgBattleWindow = function() {
-		_createSrpgBattleWindow.call(this);
+		_SRPG_UXCursor_createSrpgBattleWindow.call(this);
 		if (previewSwitch) {
 			this._mapSrpgBattleWindow.setHandler('pageup', this.switchMenuTarget.bind(this, false));
 			this._mapSrpgBattleWindow.setHandler('pagedown', this.switchMenuTarget.bind(this, true));
@@ -459,10 +606,14 @@
 	};
 
 	// automatically highlight the first target when you start targeting
-	var _startActorTargetting = Scene_Map.prototype.startActorTargetting;
+	// modified by OhisamaCraft
+	const _SRPG_UXCursor_UXCursor_startActorTargetting = Scene_Map.prototype.startActorTargetting;
 	Scene_Map.prototype.startActorTargetting = function() {
-		_startActorTargetting.call(this);
-		if (autoTarget) {
+		_SRPG_UXCursor_UXCursor_startActorTargetting.call(this);
+		const battler = $gameSystem.EventToUnit($gameTemp.activeEvent().eventId())[1];
+		const action = battler.currentAction();
+		if (autoTarget && !action.isForDeadFriend() &&
+			!($gameSystem.isPlayerFollowMouse() && !Graphics._hiddenPointer)) {
 			var id = $gameSystem.findSelection("target");
 			if ($gameTemp.canAutoSelect()) {
 				var event = $gameMap.event(id);
@@ -471,7 +622,7 @@
 		}
 	};
 
-	var _triggerAction = Game_Player.prototype.triggerAction;
+	const _SRPG_UXCursor_triggerAction = Game_Player.prototype.triggerAction;
 	Game_Player.prototype.triggerAction = function() {
 		// manually switch actors during the movement phase
 		if (moveSwitch && $gameSystem.isSRPGMode() && $gameSystem.isSubBattlePhase() === 'actor_move' &&
@@ -500,13 +651,13 @@
 				return;
 			}
 		}
-		_triggerAction.call(this);
+		_SRPG_UXCursor_triggerAction.call(this);
 	}
 
 	// after completing an action, move the cursor to the next actor
-	var _srpgAfterAction = Scene_Map.prototype.srpgAfterAction;
-	Scene_Map.prototype.srpgAfterAction = function() {
-		_srpgAfterAction.call(this);
+	const _SRPG_UXCursor_passTurnNextUnit = Scene_Map.prototype.passTurnNextUnit;
+	Scene_Map.prototype.passTurnNextUnit = function() {
+		_SRPG_UXCursor_passTurnNextUnit.call(this);
 		if (autoActor && $gameSystem.isBattlePhase() === 'actor_phase' &&
 		$gameSystem.isSubBattlePhase() === 'normal') {
 			$gameSystem.getNextRActor();

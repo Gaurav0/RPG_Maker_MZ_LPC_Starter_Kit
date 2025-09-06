@@ -37,7 +37,8 @@ Sprite_Character.LPC_MOTIONS = {
     abnormal: { index: 15, loop: true },
     sleep: { index: 16, loop: true },
     dead: { index: 17, loop: true, name: 'hurt', frames: 7 },
-    attack: { index: 18, loop: false, name: 'attack', frames: 5 }
+    enemyWalk: { index: 18, loop: true, name: 'walk', frames: 5 },
+    enemyAttack: { index: 19, loop: false, name: 'attack', frames: 5 }
 };
 
 const LPC_Motions_Sprite_Character_initialize = Sprite_Character.prototype.initialize;
@@ -139,9 +140,11 @@ Sprite_Character.prototype.updateLPCMotion = function() {
 Sprite_Character.prototype.clearLPCMotion = function() {
     this._character.setPriorityType(1);
     this._lpcMotion = null;
+    this._lpcMotionType = null;
     this._lpcMotionBitmap = null;
     this._character._characterName = this._originalCharacterName;
     this._bitmap = this._originalBitmap;
+    this._character.refresh();
 };
 
 Sprite_Character.prototype.refreshLPCMotion = function() {
@@ -175,13 +178,13 @@ Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
         if (user.isActor()) {
             gameActor = $gameActors.actor(user.actorId());
             char = gameActor.character();
-            sprite = char._sprite;
+            sprite = char.findSprite();
             sprite.playLPCMotion(user.motionType());
         } else if (user.isEnemy()) {
             gameEnemy = $gameMap.event(user._eventId);
             char = gameEnemy.unit();
-            sprite = gameEnemy._sprite;
-            sprite.playLPCMotion("attack");
+            sprite = gameEnemy.findSprite();
+            sprite.playLPCMotion("enemyAttack");
         }
         if (sprite._lpcMotion) {
             user.currentAction().item().meta.animationDelay =
@@ -192,34 +195,36 @@ Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
     LPC_Motions_Scene_Map_prototype_srpgInvokeMapSkill.call(this, data);
 };
 
-const LPC_Motions_Spriteset_Map_prototype_createCharacters = Spriteset_Map.prototype.createCharacters;
-Spriteset_Map.prototype.createCharacters = function() {
-    LPC_Motions_Spriteset_Map_prototype_createCharacters.call(this);
-    for (let i = 0; i < this._characterSprites.length; i++) {
-        const sprite = this._characterSprites[i];
-        if (!sprite._character._sprite) {
-            Object.defineProperty(sprite._character, '_sprite', {
-                value: sprite,
-                enumerable: false
-            });
-        } else {
-            sprite._character._sprite = sprite;
+SceneManager.getSceneMap = function() {
+    if (this._scene instanceof Scene_Map) {
+        return this._scene;
+    }
+    for (let i = this._stack.length - 1; i >= 0; i--) {
+        const scene = this._stack[i];
+        if (scene instanceof Scene_Map) {
+            return scene;
         }
     }
+    return null;
 };
 
-const LPC_Motions_Spriteset_Map_prototype_addCharacter = Spriteset_Map.prototype.addCharacter;
-Spriteset_Map.prototype.addCharacter = function(event) {
-    LPC_Motions_Spriteset_Map_prototype_addCharacter.call(this, event);
-    for (let i = 0; i < this._characterSprites.length; i++) {
-        const sprite = this._characterSprites[i];
-        if (!sprite._character._sprite) {
-            Object.defineProperty(sprite._character, '_sprite', {
-                value: sprite,
-                enumerable: false
-            });
+Game_Character.prototype.findSprite = function() {
+    const sceneMap = SceneManager.getSceneMap();
+    if (sceneMap) {
+        const spriteset = sceneMap._spriteset;
+        let sprite = spriteset._characterSprites.find(sprite => 
+            sprite._character._eventId === this._eventId);
+        if (sprite) {
+            return sprite;
         }
+        sprite = spriteset._characterSprites.find(sprite => {
+            const name = sprite._character._characterName;
+            const index = sprite._character._characterIndex;
+            return name === this._characterName && index === this._characterIndex;
+        });
+        return sprite ?? null;
     }
+    return null;
 };
 
 Game_Character.prototype.actor = function() {
