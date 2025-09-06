@@ -37,7 +37,8 @@ Sprite_Character.LPC_MOTIONS = {
     abnormal: { index: 15, loop: true },
     sleep: { index: 16, loop: true },
     dead: { index: 17, loop: true, name: 'hurt', frames: 7 },
-    attack: { index: 18, loop: false, name: 'attack', frames: 5 }
+    enemyWalk: { index: 18, loop: true, name: 'walk', frames: 5 },
+    enemyAttack: { index: 19, loop: false, name: 'attack', frames: 5 }
 };
 
 const LPC_Motions_Sprite_Character_initialize = Sprite_Character.prototype.initialize;
@@ -183,7 +184,7 @@ Scene_Map.prototype.srpgInvokeMapSkill = function(data) {
             gameEnemy = $gameMap.event(user._eventId);
             char = gameEnemy.unit();
             sprite = gameEnemy.findSprite();
-            sprite.playLPCMotion("attack");
+            sprite.playLPCMotion("enemyAttack");
         }
         if (sprite._lpcMotion) {
             user.currentAction().item().meta.animationDelay =
