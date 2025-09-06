@@ -2106,6 +2106,11 @@
               ]
             },
             {
+              "code": 221,
+              "indent": 1,
+              "parameters": []
+            },
+            {
               "code": 357,
               "indent": 1,
               "parameters": [
@@ -2123,6 +2128,11 @@
               "parameters": [
                 "Start/End toggle = end"
               ]
+            },
+            {
+              "code": 222,
+              "indent": 1,
+              "parameters": []
             },
             {
               "code": 353,
@@ -2156,6 +2166,11 @@
               "parameters": [
                 3
               ]
+            },
+            {
+              "code": 221,
+              "indent": 2,
+              "parameters": []
             },
             {
               "code": 357,
@@ -2198,6 +2213,11 @@
                 0,
                 1
               ]
+            },
+            {
+              "code": 222,
+              "indent": 2,
+              "parameters": []
             },
             {
               "code": 0,
@@ -2366,7 +2386,7 @@
           "walkAnime": true
         }
       ],
-      "x": 10,
+      "x": 11,
       "y": 4
     },
     {
@@ -2426,7 +2446,7 @@
           "walkAnime": true
         }
       ],
-      "x": 10,
+      "x": 11,
       "y": 6
     },
     {
@@ -2546,7 +2566,7 @@
           "walkAnime": true
         }
       ],
-      "x": 10,
+      "x": 11,
       "y": 8
     },
     {
@@ -2666,7 +2686,7 @@
           "walkAnime": true
         }
       ],
-      "x": 10,
+      "x": 11,
       "y": 10
     }
   ]
