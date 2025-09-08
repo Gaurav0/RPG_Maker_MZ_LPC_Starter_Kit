@@ -1,5 +1,5 @@
 { "columns":32,
- "image":"img/img/tilesets/LPC/Terrain and Outside.png",
+ "image":"img/img\/tilesets\/LPC\/Terrain and Outside.png",
  "imageheight":1024,
  "imagewidth":1024,
  "margin":0,
@@ -8,6 +8,34 @@
  "tilecount":1024,
  "tiledversion":"1.11.0",
  "tileheight":32,
+ "tiles":[
+        {
+         "id":509,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }, 
+        {
+         "id":541,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }, 
+        {
+         "id":573,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }],
  "tilewidth":32,
  "transparentcolor":"#898989",
  "type":"tileset",
