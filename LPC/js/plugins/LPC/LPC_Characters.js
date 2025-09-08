@@ -220,6 +220,9 @@ const LPC_Characters_Sprite_Character_prototype_updateCharacterFrame = Sprite_Ch
 Sprite_Character.prototype.updateCharacterFrame = function() {
     if ($gameSystem.isSRPGMode() && !this.isLPCMotionRequested()) {
         LPC_Characters_Sprite_Character_prototype_updateCharacterFrame.call(this);
+        this._frame.x += this.characterOffsetX();
+        this._frame.y += this.characterOffsetY();
+        this.anchor.y = this.anchorY();
     } else {
         const pw = this.patternWidth();
         const ph = this.patternHeight();
