@@ -148,6 +148,36 @@ Game_CharacterBase.prototype.straighten = function () {
     this._animationCount = 0;
 };
 
+const LPC_Characters_Game_Actor_prototype_refresh = Game_Actor.prototype.refresh;
+Game_Actor.prototype.refresh = function() {
+    LPC_Characters_Game_Actor_prototype_refresh.call(this);
+    ImageManager.loadBitmap('img/characters/' + generateLPCAnimationFilename(this._characterName, 'climb'));
+};
+
+function generateLPCAnimationFilename(characterName, animationName) {
+    if (!characterName || !characterName.includes('/')) {
+        return characterName;
+    }
+
+    let filename;
+    const lastSlashIndex = characterName.lastIndexOf('/');
+    if (animationName.includes('/')) {
+        const secondLastSlashIndex = characterName.lastIndexOf('/', lastSlashIndex - 1);
+        filename = characterName.substring(0, secondLastSlashIndex) + '/' + animationName;
+    } else {
+        filename = characterName.substring(0, lastSlashIndex) + '/' + animationName;
+    }
+    return filename;
+}
+
+const LPC_Characters_Game_Character_characterName = Game_Character.prototype.characterName;
+Game_Character.prototype.characterName = function() {
+    if (this.isOnLadder() && this.paramType() === 'chars') {
+        return generateLPCAnimationFilename(this._characterName, 'climb');
+    }
+    return LPC_Characters_Game_Character_characterName.call(this);
+};
+
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);
     const o = params[paramType(characterName)];
@@ -205,7 +235,7 @@ Sprite_Character.prototype.patternWidth = function () {
     if (this.paramType() === 'null') {
         return LPC_Characters_Sprite_Character_patternWidth.call(this);
     }
-    return calcLPCCustomPatternWidthOrHeight(this._character._characterName) ?? params[this.paramType()].pw;
+    return calcLPCCustomPatternWidthOrHeight(this._character.characterName()) ?? params[this.paramType()].pw;
 };
 
 const LPC_Characters_Sprite_Character_patternHeight = Sprite_Character.prototype.patternHeight;
@@ -213,7 +243,7 @@ Sprite_Character.prototype.patternHeight = function () {
     if (this.paramType() === 'null') {
         return LPC_Characters_Sprite_Character_patternHeight.call(this);
     }
-    return calcLPCCustomPatternWidthOrHeight(this._character._characterName) ?? params[this.paramType()].ph;
+    return calcLPCCustomPatternWidthOrHeight(this._character.characterName()) ?? params[this.paramType()].ph;
 };
 
 const LPC_Characters_Sprite_Character_prototype_updateCharacterFrame = Sprite_Character.prototype.updateCharacterFrame;
@@ -255,12 +285,12 @@ function calcLPCCustomPatternCharOffset(characterName, axis, dir) {
 }
 
 Sprite_Character.prototype.characterOffsetX = function() {
-    return calcLPCCustomPatternCharOffset(this._character._characterName, 'x', this._character.direction()) ??
+    return calcLPCCustomPatternCharOffset(this._character.characterName(), 'x', this._character.direction()) ??
         params[this.paramType()].dxo;
 };
 
 Sprite_Character.prototype.characterOffsetY = function() {
-    return calcLPCCustomPatternCharOffset(this._character._characterName, 'y', this._character.direction()) ??
+    return calcLPCCustomPatternCharOffset(this._character.characterName(), 'y', this._character.direction()) ??
         params[this.paramType()].dyo;
 };
 
