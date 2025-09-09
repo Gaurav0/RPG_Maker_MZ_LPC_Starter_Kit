@@ -292,7 +292,7 @@
                 {
                  "name":"zIndex",
                  "type":"string",
-                 "value":"3"
+                 "value":"2"
                 }],
          "type":"tilelayer",
          "visible":true,

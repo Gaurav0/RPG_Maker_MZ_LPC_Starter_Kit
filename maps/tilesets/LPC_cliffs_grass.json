@@ -1,5 +1,5 @@
 { "columns":12,
- "image":"img/img/tilesets/LPC/LPC_cliffs_grass.png",
+ "image":"img/img\/tilesets\/LPC\/LPC_cliffs_grass.png",
  "imageheight":288,
  "imagewidth":384,
  "margin":0,
@@ -8,6 +8,34 @@
  "tilecount":108,
  "tiledversion":"1.11.0",
  "tileheight":32,
+ "tiles":[
+        {
+         "id":57,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }, 
+        {
+         "id":69,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }, 
+        {
+         "id":81,
+         "properties":[
+                {
+                 "name":"ladder",
+                 "type":"string",
+                 "value":"true"
+                }]
+        }],
  "tilewidth":32,
  "transparentcolor":"#000000",
  "type":"tileset",
