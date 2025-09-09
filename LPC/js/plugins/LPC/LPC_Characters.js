@@ -86,9 +86,25 @@ Game_CharacterBase.prototype.isDoor = function() {
     return this.paramType() === 'doors';
 }
 
+Game_CharacterBase.prototype.isChar = function() {
+    return this.paramType() === 'chars';
+}
+
+Game_CharacterBase.prototype.animationName = function() {
+    return this.characterName().split('/').pop().toLowerCase();
+};
+
 Game_CharacterBase.prototype.numFrames = function() {
     if (this.paramType() === 'null') {
         return 4;
+    }
+    if (this.isChar()) {
+        switch (this.animationName()) {
+            case 'walk':
+                return 9;
+            case 'climb':
+                return 6;
+        }
     }
     return params[this.paramType()].frames;
 };
@@ -126,6 +142,9 @@ Game_CharacterBase.prototype.updatePattern = function () {
 };
 
 Game_CharacterBase.prototype.animationWait = function () {
+    if (this.isOnLadder() && this.paramType() === 'chars') {
+        return 120 / this.numFrames();
+    }
     return 30 / this.numFrames();
 };
 
@@ -148,10 +167,49 @@ Game_CharacterBase.prototype.straighten = function () {
     this._animationCount = 0;
 };
 
-const LPC_Characters_Game_Actor_prototype_refresh = Game_Actor.prototype.refresh;
-Game_Actor.prototype.refresh = function() {
-    LPC_Characters_Game_Actor_prototype_refresh.call(this);
-    ImageManager.loadBitmap('img/characters/' + generateLPCAnimationFilename(this._characterName, 'climb'));
+const preloadedLPCCharacters = {};
+
+Game_Character.prototype.preloadImages = function() {
+    let filenames = ['walk', 'climb'];
+    for (const name of filenames) {
+        const filename = generateLPCAnimationFilename(this._characterName, name);
+        if (!preloadedLPCCharacters[filename]) {
+            preloadedLPCCharacters[filename] = ImageManager.loadCharacter(filename);
+        }
+    }
+};
+
+LPC_Characters_Sprite_Character_prototype_setCharacterBitmap = Sprite_Character.prototype.setCharacterBitmap;
+Sprite_Character.prototype.setCharacterBitmap = function() {
+    let bitmap;
+    if (bitmap = preloadedLPCCharacters[this._characterName]) {
+        if (bitmap.isReady()) {
+            this._bitmap = bitmap;
+        } else {
+            this.bitmap = bitmap;
+        }
+        this._isBigCharacter = ImageManager.isBigCharacter(this._characterName);
+        return;
+    }
+    LPC_Characters_Sprite_Character_prototype_setCharacterBitmap.call(this);
+};
+
+Game_Player.prototype.preloadImages = Game_Character.prototype.preloadImages;
+Game_Follower.prototype.preloadImages = Game_Character.prototype.preloadImages;
+
+const LPC_Characters_Game_Player_prototype_refresh = Game_Player.prototype.refresh;
+Game_Player.prototype.refresh = function() {
+    if (preloadedLPCCharacters[$gameParty.leader().characterName()]) {
+        return;
+    }
+    LPC_Characters_Game_Player_prototype_refresh.call(this);
+};
+
+LPC_Characters_Spriteset_Map_prototype_createCharacters = Spriteset_Map.prototype.createCharacters;
+Spriteset_Map.prototype.createCharacters = function() {
+    LPC_Characters_Spriteset_Map_prototype_createCharacters.call(this);
+    $gamePlayer.preloadImages();
+    $gamePlayer.followers().visibleFollowers().forEach(follower => follower.preloadImages());
 };
 
 function generateLPCAnimationFilename(characterName, animationName) {
@@ -170,13 +228,25 @@ function generateLPCAnimationFilename(characterName, animationName) {
     return filename;
 }
 
-const LPC_Characters_Game_Character_characterName = Game_Character.prototype.characterName;
-Game_Character.prototype.characterName = function() {
+const LPC_Characters_Game_CharacterBase_characterName = Game_CharacterBase.prototype.characterName;
+Game_CharacterBase.prototype.characterName = function() {
     if (this.isOnLadder() && this.paramType() === 'chars') {
         return generateLPCAnimationFilename(this._characterName, 'climb');
     }
-    return LPC_Characters_Game_Character_characterName.call(this);
+    return LPC_Characters_Game_CharacterBase_characterName.call(this);
 };
+
+const LPC_Characters_Game_CharacterBase_realMoveSpeed = Game_CharacterBase.prototype.realMoveSpeed;
+Game_CharacterBase.prototype.realMoveSpeed = function() {
+    if (this.isOnLadder() && this.paramType() === 'chars') {
+        return LPC_Characters_Game_CharacterBase_realMoveSpeed.call(this) - 2;
+    }
+    return LPC_Characters_Game_CharacterBase_realMoveSpeed.call(this);
+};
+
+Game_Player.prototype.isOnLadder = Game_CharacterBase.prototype.isOnLadder;
+Game_Player.prototype.realMoveSpeed = Game_CharacterBase.prototype.realMoveSpeed;
+Game_Player.prototype.animationWait = Game_CharacterBase.prototype.animationWait;
 
 Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x, y) {
     const bitmap = ImageManager.loadCharacter(characterName);

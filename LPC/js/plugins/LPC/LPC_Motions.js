@@ -212,17 +212,19 @@ Game_Character.prototype.findSprite = function() {
     const sceneMap = SceneManager.getSceneMap();
     if (sceneMap) {
         const spriteset = sceneMap._spriteset;
-        let sprite = spriteset._characterSprites.find(sprite => 
-            sprite._character._eventId === this._eventId);
-        if (sprite) {
-            return sprite;
+        if (spriteset) {
+            let sprite = spriteset._characterSprites.find(sprite => 
+                sprite._character._eventId === this._eventId);
+            if (sprite) {
+                return sprite;
+            }
+            sprite = spriteset._characterSprites.find(sprite => {
+                const name = sprite._character._characterName;
+                const index = sprite._character._characterIndex;
+                return name === this._characterName && index === this._characterIndex;
+            });
+            return sprite ?? null;
         }
-        sprite = spriteset._characterSprites.find(sprite => {
-            const name = sprite._character._characterName;
-            const index = sprite._character._characterIndex;
-            return name === this._characterName && index === this._characterIndex;
-        });
-        return sprite ?? null;
     }
     return null;
 };
