@@ -90,6 +90,10 @@ Game_CharacterBase.prototype.isChar = function() {
     return this.paramType() === 'chars';
 }
 
+Game_CharacterBase.prototype.isLPCEnemy = function() {
+    return this.paramType() === 'enemies';
+}
+
 Game_CharacterBase.prototype.animationName = function() {
     return this.characterName().split('/').pop().toLowerCase();
 };
@@ -142,7 +146,7 @@ Game_CharacterBase.prototype.updatePattern = function () {
 };
 
 Game_CharacterBase.prototype.animationWait = function () {
-    if (this.isOnLadder() && this.paramType() === 'chars') {
+    if ($gameSystem.isSRPGMode() && this.isOnLadder() && this.isChar()) {
         return 120 / this.numFrames();
     }
     return 30 / this.numFrames();
@@ -182,14 +186,20 @@ Game_Character.prototype.preloadImages = function() {
 LPC_Characters_Sprite_Character_prototype_setCharacterBitmap = Sprite_Character.prototype.setCharacterBitmap;
 Sprite_Character.prototype.setCharacterBitmap = function() {
     let bitmap;
+    this._preloaded = false;
+    const char = this._character;
+    if ($gameSystem.isSRPGMode()) {
+        return LPC_Characters_Sprite_Character_prototype_setCharacterBitmap.call(this);
+    }
     if (bitmap = preloadedLPCCharacters[this._characterName]) {
+        console.log("Using preloaded bitmap for " + this._characterName, char);
         if (bitmap.isReady()) {
             this._bitmap = bitmap;
         } else {
             this.bitmap = bitmap;
         }
         this._isBigCharacter = ImageManager.isBigCharacter(this._characterName);
-        return;
+        this._preloaded = true;
     }
     LPC_Characters_Sprite_Character_prototype_setCharacterBitmap.call(this);
 };
@@ -199,7 +209,7 @@ Game_Follower.prototype.preloadImages = Game_Character.prototype.preloadImages;
 
 const LPC_Characters_Game_Player_prototype_refresh = Game_Player.prototype.refresh;
 Game_Player.prototype.refresh = function() {
-    if (preloadedLPCCharacters[$gameParty.leader().characterName()]) {
+    if (!$gameSystem.isSRPGMode() && preloadedLPCCharacters[this.characterName()]) {
         return;
     }
     LPC_Characters_Game_Player_prototype_refresh.call(this);
@@ -230,7 +240,7 @@ function generateLPCAnimationFilename(characterName, animationName) {
 
 const LPC_Characters_Game_CharacterBase_characterName = Game_CharacterBase.prototype.characterName;
 Game_CharacterBase.prototype.characterName = function() {
-    if (this.isOnLadder() && this.paramType() === 'chars') {
+    if (!$gameSystem.isSRPGMode() && this.isChar() && this.isOnLadder()) {
         return generateLPCAnimationFilename(this._characterName, 'climb');
     }
     return LPC_Characters_Game_CharacterBase_characterName.call(this);
@@ -238,7 +248,7 @@ Game_CharacterBase.prototype.characterName = function() {
 
 const LPC_Characters_Game_CharacterBase_realMoveSpeed = Game_CharacterBase.prototype.realMoveSpeed;
 Game_CharacterBase.prototype.realMoveSpeed = function() {
-    if (this.isOnLadder() && this.paramType() === 'chars') {
+    if (!$gameSystem.isSRPGMode() && this.isOnLadder() && this.isChar()) {
         return LPC_Characters_Game_CharacterBase_realMoveSpeed.call(this) - 2;
     }
     return LPC_Characters_Game_CharacterBase_realMoveSpeed.call(this);
@@ -262,7 +272,7 @@ Window_Base.prototype.drawCharacter = function (characterName, characterIndex, x
 };
 
 Sprite_Character.prototype.paramType = function() {
-    return paramType(this._character.characterName());
+    return paramType(this._character._characterName);
 };
 
 Sprite_Character.prototype.isDoor = function() {
@@ -318,25 +328,11 @@ Sprite_Character.prototype.patternHeight = function () {
 
 const LPC_Characters_Sprite_Character_prototype_updateCharacterFrame = Sprite_Character.prototype.updateCharacterFrame;
 Sprite_Character.prototype.updateCharacterFrame = function() {
-    if ($gameSystem.isSRPGMode() && !this.isLPCMotionRequested()) {
-        LPC_Characters_Sprite_Character_prototype_updateCharacterFrame.call(this);
+    LPC_Characters_Sprite_Character_prototype_updateCharacterFrame.call(this);
+    const char = this._character;
+    if (char.isChar() || char.isLPCEnemy() || char.isDoor()) {
         this._frame.x += this.characterOffsetX();
         this._frame.y += this.characterOffsetY();
-        this.anchor.y = this.anchorY();
-    } else {
-        const pw = this.patternWidth();
-        const ph = this.patternHeight();
-        const sx = (this.characterBlockX() + this.characterPatternX()) * pw + this.characterOffsetX();
-        const sy = (this.characterBlockY() + this.characterPatternY()) * ph + this.characterOffsetY();
-        this.updateHalfBodySprites();
-        if (this._bushDepth > 0) {
-            const d = this._bushDepth;
-            this._upperBody.setFrame(sx, sy, pw, ph - d);
-            this._lowerBody.setFrame(sx, sy + ph - d, pw, d);
-            this.setFrame(sx, sy, 0, ph);
-        } else {
-            this.setFrame(sx, sy, pw, ph);
-        }
         this.anchor.y = this.anchorY();
     }
 };
